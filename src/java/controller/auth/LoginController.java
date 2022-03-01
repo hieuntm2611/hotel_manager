@@ -27,7 +27,7 @@ public class LoginController extends HttpServlet {
         HttpSession session = request.getSession(false);
         boolean loggedIn = session != null && session.getAttribute("user") != null;
         if (loggedIn) {
-            response.sendRedirect("/");
+            response.sendRedirect("/admin");
         }else{
             request.getRequestDispatcher("/views/admin/auth/login.jsp").forward(request, response);
         }
@@ -44,7 +44,7 @@ public class LoginController extends HttpServlet {
             if (user != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
-                response.sendRedirect("/");
+                response.sendRedirect("/dashboard");
             } else {
                 request.setAttribute("error", "Username or password wrong!");
                 request.getRequestDispatcher("/views/admin/auth/login.jsp").forward(request, response);

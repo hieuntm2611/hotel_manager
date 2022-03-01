@@ -21,6 +21,36 @@ import model.auth.User;
  */
 public class UserDBContext extends DBContext<User> {
 
+     public int hasPermission(int id, String feature, String code) {
+        String sql = "SELECT COUNT(*) AS 'total'\n" +
+                    "FROM [user] INNER JOIN [user_group]\n" +
+                    "ON [user].id = user_group.userId \n" +
+                    "INNER JOIN [group]\n" +
+                    "ON user_group.groupId = [group].id\n" +
+                    "INNER JOIN [group_action] \n" +
+                    "ON [group].id = [group_action].groupId\n" +
+                    "INNER JOIN [action] \n" +
+                    "ON [group_action].actionId=[action].id\n" +
+                    "WHERE [user].id =? \n" +
+                    "AND [action].feature =?\n" +
+                    "AND [action].code=?";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.setString(2, feature);
+            statement.setString(3, code);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+               return result.getInt("total");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return -1;
+    }
+     
+     
     public User getUser(String username, String password) {
         try {
             String sql = "SELECT [user].[id]\n"
