@@ -5,13 +5,17 @@
  */
 package model.room;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author hieu2
  */
-public class RoomState {
+public class Category {
     private int id;
     private String name;
+    private double price;
+    private ArrayList<Utility> utilities;
 
     public int getId() {
         return id;
@@ -28,6 +32,21 @@ public class RoomState {
     public void setName(String name) {
         this.name = name;
     }
-    
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public ArrayList<Utility> getUtilities() {
+        return utilities;
+    }
+
+    public void setUtilities(ArrayList<Utility> utilities) {
+        this.utilities = utilities;
+    }
     
 }

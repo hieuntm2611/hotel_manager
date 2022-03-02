@@ -9,7 +9,7 @@ package model.room;
  *
  * @author hieu2
  */
-public class RoomState {
+public class Utility {
     private int id;
     private String name;
 
@@ -28,6 +28,5 @@ public class RoomState {
     public void setName(String name) {
         this.name = name;
     }
-    
     
 }

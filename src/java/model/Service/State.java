@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.room;
+package model.Service;
 
 /**
  *
  * @author hieu2
  */
-public class RoomState {
+public class State {
     private int id;
     private String name;
 
@@ -28,6 +28,5 @@ public class RoomState {
     public void setName(String name) {
         this.name = name;
     }
-    
     
 }

@@ -12,44 +12,54 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.auth.User;
-import model.room.Room;
+import model.room.Category;
+import model.room.Utility;
 
 /**
  *
  * @author hieu2
  */
-public class RoomDBContext extends DBContext<Room> {
+public class CategoryDBContext extends DBContext<Category>{
 
     @Override
-    public ArrayList all() {
-        ArrayList<Room> rooms = new ArrayList<>();
-        String sql = "";
+    public ArrayList<Category> all() {
+        ArrayList<Category> categories = new ArrayList<>();
+        UtilityDBContext db = new UtilityDBContext();
+        String sql = "SELECT [id]\n" +
+                    "      ,[name]\n" +
+                    "      ,[price]\n" +
+                    "  FROM [category]";
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(sql);
             ResultSet result = statement.executeQuery();
             while (result.next()) {
-                
+                Category category = new Category();
+                category.setId(result.getInt("id"));
+                category.setName(result.getString("name"));
+                category.setPrice(result.getDouble("price"));
+                ArrayList<Utility> listU = db.getUtilitiesByCategory(category.getId());
+                category.setUtilities(listU);
+                categories.add(category);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(RoomDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return rooms;
+        return categories;
     }
 
     @Override
-    public Room get(int id) {
+    public Category get(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Room insert(Room model) {
+    public Category insert(Category model) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void update(Room model) {
+    public void update(Category model) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -58,10 +68,4 @@ public class RoomDBContext extends DBContext<Room> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    
-    
-    
-    
-    
-
 }
