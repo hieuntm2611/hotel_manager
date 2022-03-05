@@ -203,7 +203,8 @@ public class ServiceDBContext extends DBContext<Service>{
 
     @Override
     public void delete(int id) {
-        String sql = "";
+        String sql = "DELETE FROM [dbo].[service]\n" +
+                    "      WHERE id=?";
         PreparedStatement stm = null;
         try {
             stm = connection.prepareStatement(sql);
