@@ -3,24 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/auth/LoginController.java</file>
-            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/web/views/admin/dashboard/dashboard.jsp</file>
-            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/model/auth/User.java</file>
             <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/model/room/Room.java</file>
-            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/web/views/admin/main/slidebar.jsp</file>
-            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/model/room/RoomState.java</file>
-            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/dal/room/RoomDBContext.java</file>
-            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/web/views/admin/main/footer.jsp</file>
-            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/web/views/admin/main/header.jsp</file>
-            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/dal/DBContext.java</file>
-            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/model/auth/Group.java</file>
-            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/dashboard/DashboardController.java</file>
-            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/web/index.html</file>
-            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/dal/user/GroupDBContext.java</file>
-            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/web/views/admin/auth/login.jsp</file>
-            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/auth/BaseAuthController.java</file>
-            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/dal/user/UserDBContext.java</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/dal/room/CategoryDBContext.java</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/model/Service/State.java</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/model/Service/Customer.java</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/dal/room/UtilityDBContext.java</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/model/Service/Service.java</file>
         </group>
     </open-files>
 </project-private>
