@@ -80,8 +80,8 @@ public class CustomerDBContext extends DBContext<Customer>{
         }
         return null;
     }
-    
-    public void insertCustomer(Customer customer){
+    @Override
+    public void insert(Customer customer){
         String sql = "INSERT INTO [dbo].[customer]\n" +
                     "           ([name]\n" +
                     "           ,[gender]\n" +
@@ -156,10 +156,6 @@ public class CustomerDBContext extends DBContext<Customer>{
         return null;
     }
 
-    @Override
-    public Customer insert(Customer model) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     @Override
     public void update(Customer customer) {

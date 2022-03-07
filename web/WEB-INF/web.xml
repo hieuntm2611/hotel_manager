@@ -8,6 +8,22 @@
         <servlet-name>DashboardController</servlet-name>
         <servlet-class>controller.dashboard.DashboardController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RoomStateController</servlet-name>
+        <servlet-class>controller.admin.roomstate.RoomStateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteRoomStateController</servlet-name>
+        <servlet-class>controller.admin.roomstate.DeleteRoomStateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateRoomStateController</servlet-name>
+        <servlet-class>controller.admin.roomstate.UpdateRoomStateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateRoomStateController</servlet-name>
+        <servlet-class>controller.admin.roomstate.CreateRoomStateController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/admin/login</url-pattern>
@@ -15,6 +31,22 @@
     <servlet-mapping>
         <servlet-name>DashboardController</servlet-name>
         <url-pattern>/dashboard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RoomStateController</servlet-name>
+        <url-pattern>/admin/room/state</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteRoomStateController</servlet-name>
+        <url-pattern>/admin/room/state/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateRoomStateController</servlet-name>
+        <url-pattern>/admin/room/state/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateRoomStateController</servlet-name>
+        <url-pattern>/admin/room/state/create</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

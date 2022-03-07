@@ -100,8 +100,8 @@ public class ServiceDBContext extends DBContext<Service>{
         }
         return null;
     }
-    
-    public void insertService(Service service){
+    @Override
+    public void insert(Service service){
         String sql = "INSERT INTO [service]\n" +
                     "           ([startDate]\n" +
                     "           ,[endDate]\n" +
@@ -149,11 +149,6 @@ public class ServiceDBContext extends DBContext<Service>{
             }
         }
         
-    }
-
-    @Override
-    public Service insert(Service service) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
