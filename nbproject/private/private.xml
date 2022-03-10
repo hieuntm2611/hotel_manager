@@ -3,21 +3,38 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/admin/utility/CreateUtilityController.java</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/admin/room/UpdateRoomController.java</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/admin/customer/UpdateCustomerController.java</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/admin/service/CreateServiceController.java</file>
             <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/admin/utility/UtilityController.java</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/model/room/Room.java</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/admin/category/CategoryController.java</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/admin/customer/RemoveCustomerController.java</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/dal/room/RoomDBContext.java</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/admin/service/RemoveServiceController.java</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/dal/room/CategoryDBContext.java</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/admin/category/RemoveCategoryController.java</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/admin/utility/CreateUtilityController.java</file>
             <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/model/room/Utility.java</file>
             <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/admin/roomstate/RoomStateController.java</file>
-            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/admin/category/CategoryController.java</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/model/service/Service.java</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/admin/room/RoomController.java</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/admin/service/ServiceController.java</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/admin/customer/CustomerController.java</file>
             <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/admin/utility/RemoveUtilityController.java</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/model/service/Customer.java</file>
             <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/admin/category/CreateCategoryController.java</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/dal/service/ServiceDBContext.java</file>
             <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/model/room/Category.java</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/admin/service/UpdateServiceController.java</file>
             <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/admin/utility/UpdateUtilityController.java</file>
-            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/web/WEB-INF/web.xml</file>
             <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/admin/category/UpdateCategoryController.java</file>
             <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/admin/roomstate/CreateRoomStateController.java</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/admin/room/RemoveRoomController.java</file>
             <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/admin/roomstate/RemoveRoomStateController.java</file>
             <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/admin/roomstate/UpdateRoomStateController.java</file>
-            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/admin/category/RemoveCategoryController.java</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/admin/customer/CreateCustomerController.java</file>
         </group>
     </open-files>
 </project-private>
