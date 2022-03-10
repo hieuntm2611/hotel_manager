@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.admin.roomstate;
+package controller.admin.room;
 
 import controller.auth.BaseAuthController;
-import dal.room.RoomStateDBContext;
+import dal.room.RoomDBContext;
 import dal.user.UserDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,28 +16,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.auth.User;
-import model.room.RoomState;
+import model.room.Room;
 
 /**
  *
  * @author hieu2
  */
-public class RoomStateController extends BaseAuthController {
-    
+public class UpdateRoomController extends BaseAuthController {
+
     @Override
     protected boolean isPermission(HttpServletRequest request) {
         UserDBContext userDB = new UserDBContext();
         User user = (User) request.getSession().getAttribute("user");
-        int num = userDB.hasPermission(user.getId(), "ROOMSTATE", "READ");
+        int num = userDB.hasPermission(user.getId(), "CUSTOMER", "READ");
         return num >= 1;
     }
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RoomStateDBContext db = new RoomStateDBContext();
-        ArrayList<RoomState> roomStates = db.all();
-        request.setAttribute("roomStates", roomStates);
-        request.getRequestDispatcher("./").forward(request, response);
+        RoomDBContext db = new RoomDBContext();
+        ArrayList<Room> rooms = db.all();
+        request.setAttribute("rooms", rooms);
+        request.getRequestDispatcher("/").forward(request, response);
     }
 
     
@@ -51,15 +51,28 @@ public class RoomStateController extends BaseAuthController {
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+    int id = Integer.parseInt(request.getParameter("id"));
+    String name = request.getParameter("name");
+    int categoryId = Integer.parseInt(request.getParameter("categoryId"));
+    int roomstateId= Integer.parseInt(request.getParameter("roomstateId"));
+    Room r = new Room();
+    r.setCategoryId(categoryId);
+    r.setId(id);
+    r.setName(name);
+    r.setRoomstateId(roomstateId);
+    RoomDBContext db = new RoomDBContext();
+    db.update(r);
+    response.sendRedirect("./");
     }
 
-    
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
     @Override
     public String getServletInfo() {
         return "Short description";
-    }
-
-    
+    }// </editor-fold>
 
 }

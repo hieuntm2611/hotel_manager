@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.admin.roomstate;
+package controller.admin.utility;
 
 import controller.auth.BaseAuthController;
-import dal.room.RoomStateDBContext;
+import dal.room.UtilityDBContext;
 import dal.user.UserDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,65 +16,45 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.auth.User;
-import model.room.RoomState;
+import model.room.Utility;
 
 /**
  *
  * @author hieu2
  */
-public class UpdateRoomStateController extends BaseAuthController {
-
+public class RemoveUtilityController extends BaseAuthController {
+    
     @Override
     protected boolean isPermission(HttpServletRequest request) {
         UserDBContext userDB = new UserDBContext();
         User user = (User) request.getSession().getAttribute("user");
-        int num = userDB.hasPermission(user.getId(), "ROOMSTATE", "UPDATE");
+        int num = userDB.hasPermission(user.getId(), "UTILITY", "REMOVE");
         return num >= 1;
     }
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void processGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        RoomStateDBContext db = new RoomStateDBContext();
-        ArrayList<RoomState> roomStates = db.all();
-        request.setAttribute("roomStates", roomStates);
+        UtilityDBContext db = new UtilityDBContext();
+        ArrayList<Utility> utilitys = db.all();
+        request.setAttribute("utilitys", utilitys);
         request.getRequestDispatcher("/").forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
+    @Override
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String rawId = request.getParameter("id");
-        String rawName = request.getParameter("name");
-        int id = Integer.parseInt(rawId);
-        String name = rawName;
-        RoomState r = new RoomState();
-        r.setId(id);
-        r.setName(name);
-        RoomStateDBContext db = new RoomStateDBContext();
-        db.update(r);
+        String rawid = request.getParameter("id");
+        int id = Integer.parseInt(rawid);
+        UtilityDBContext db = new UtilityDBContext();
+        db.delete(id);
         response.sendRedirect("./");
     }
 

@@ -6,14 +6,17 @@
 package controller.admin.roomstate;
 
 import controller.auth.BaseAuthController;
+import dal.room.RoomStateDBContext;
 import dal.user.UserDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.auth.User;
+import model.room.RoomState;
 
 /**
  *
@@ -38,14 +41,26 @@ public class CreateRoomStateController extends BaseAuthController {
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        RoomStateDBContext db = new RoomStateDBContext();
+        ArrayList<RoomState> roomStates = db.all();
+        request.setAttribute("roomStates", roomStates);
+        request.getRequestDispatcher("/").forward(request, response);
     }
 
     
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String rawId = request.getParameter("id");
+        String rawName = request.getParameter("name");
+        int id = Integer.parseInt(rawId);
+        String name = rawName;
+        RoomState r = new RoomState();
+        r.setId(id);
+        r.setName(name);
+        RoomStateDBContext db = new RoomStateDBContext();
+        db.insert(r);
+        response.sendRedirect("./");
     }
 
     /**

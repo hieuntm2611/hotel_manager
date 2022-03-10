@@ -3,35 +3,41 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.admin.roomstate;
+package controller.admin.utility;
 
 import controller.auth.BaseAuthController;
+import dal.room.UtilityDBContext;
 import dal.user.UserDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.auth.User;
+import model.room.Utility;
 
 /**
  *
  * @author hieu2
  */
-public class DeleteRoomStateController extends BaseAuthController {
-    
+public class UpdateUtilityController extends BaseAuthController {
+
     @Override
     protected boolean isPermission(HttpServletRequest request) {
         UserDBContext userDB = new UserDBContext();
         User user = (User) request.getSession().getAttribute("user");
-        int num = userDB.hasPermission(user.getId(), "ROOMSTATE", "REMOVE");
+        int num = userDB.hasPermission(user.getId(), "UTILITY", "UPDATE");
         return num >= 1;
     }
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         
+        UtilityDBContext db = new UtilityDBContext();
+        ArrayList<Utility> utilitys = db.all();
+        request.setAttribute("utilitys", utilitys);
+        request.getRequestDispatcher("/").forward(request, response);
     }
 
     
@@ -45,7 +51,15 @@ public class DeleteRoomStateController extends BaseAuthController {
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        UtilityDBContext db = new UtilityDBContext();
+        
+        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        Utility u = new Utility();
+        u.setId(id);
+        u.setName(name);
+        db.update(u);
+        response.sendRedirect("./");
     }
 
     /**
@@ -57,7 +71,5 @@ public class DeleteRoomStateController extends BaseAuthController {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    
 
 }

@@ -14,7 +14,7 @@
     </servlet>
     <servlet>
         <servlet-name>DeleteRoomStateController</servlet-name>
-        <servlet-class>controller.admin.roomstate.DeleteRoomStateController</servlet-class>
+        <servlet-class>controller.admin.roomstate.RemoveRoomStateController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UpdateRoomStateController</servlet-name>
@@ -23,6 +23,102 @@
     <servlet>
         <servlet-name>CreateRoomStateController</servlet-name>
         <servlet-class>controller.admin.roomstate.CreateRoomStateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StateController</servlet-name>
+        <servlet-class>controller.admin.state.StateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateStateController</servlet-name>
+        <servlet-class>controller.admin.state.CreateStateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteStateController</servlet-name>
+        <servlet-class>controller.admin.state.DeleteStateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateStateController</servlet-name>
+        <servlet-class>controller.admin.state.UpdateStateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UtilityController</servlet-name>
+        <servlet-class>controller.admin.utility.UtilityController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateUtilityController</servlet-name>
+        <servlet-class>controller.admin.utility.CreateUtilityController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateUtilityController</servlet-name>
+        <servlet-class>controller.admin.utility.UpdateUtilityController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteUtilityController</servlet-name>
+        <servlet-class>controller.admin.utility.RemoveUtilityController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CategoryController</servlet-name>
+        <servlet-class>controller.admin.category.CategoryController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateCategoryController</servlet-name>
+        <servlet-class>controller.admin.category.CreateCategoryController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveCategoryController</servlet-name>
+        <servlet-class>controller.admin.category.RemoveCategoryController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateCategoryController</servlet-name>
+        <servlet-class>controller.admin.category.UpdateCategoryController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CustomerController</servlet-name>
+        <servlet-class>controller.admin.customer.CustomerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateCustomerController</servlet-name>
+        <servlet-class>controller.admin.customer.CreateCustomerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveCustomerController</servlet-name>
+        <servlet-class>controller.admin.customer.RemoveCustomerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateCustomerController</servlet-name>
+        <servlet-class>controller.admin.customer.UpdateCustomerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RoomController</servlet-name>
+        <servlet-class>controller.admin.room.RoomController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateRoomDBContext</servlet-name>
+        <servlet-class>controller.admin.room.CreateRoomDBContext</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateRoomController</servlet-name>
+        <servlet-class>controller.admin.room.UpdateRoomController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteRoomController</servlet-name>
+        <servlet-class>controller.admin.room.RemoveRoomController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServiceController</servlet-name>
+        <servlet-class>controller.admin.service.ServiceController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateServiceController</servlet-name>
+        <servlet-class>controller.admin.service.CreateServiceController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteServiceController</servlet-name>
+        <servlet-class>controller.admin.service.RemoveServiceController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateServiceController</servlet-name>
+        <servlet-class>controller.admin.service.UpdateServiceController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -47,6 +143,102 @@
     <servlet-mapping>
         <servlet-name>CreateRoomStateController</servlet-name>
         <url-pattern>/admin/room/state/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StateController</servlet-name>
+        <url-pattern>/admin/service/state</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateStateController</servlet-name>
+        <url-pattern>/admin/service/state/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteStateController</servlet-name>
+        <url-pattern>/admin/service/state/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateStateController</servlet-name>
+        <url-pattern>/admin/service/state/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UtilityController</servlet-name>
+        <url-pattern>/admin/category/utility</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateUtilityController</servlet-name>
+        <url-pattern>/admin/category/utility/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateUtilityController</servlet-name>
+        <url-pattern>/admin/category/utility/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteUtilityController</servlet-name>
+        <url-pattern>/admin/category/utility/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CategoryController</servlet-name>
+        <url-pattern>/admin/category</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateCategoryController</servlet-name>
+        <url-pattern>/admin/category/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveCategoryController</servlet-name>
+        <url-pattern>/admin/category/remove</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCategoryController</servlet-name>
+        <url-pattern>/admin/category/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerController</servlet-name>
+        <url-pattern>/admin/customer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateCustomerController</servlet-name>
+        <url-pattern>/admin/customer/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveCustomerController</servlet-name>
+        <url-pattern>/admin/customer/remove</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCustomerController</servlet-name>
+        <url-pattern>/admin/customer/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RoomController</servlet-name>
+        <url-pattern>/admin/room</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateRoomDBContext</servlet-name>
+        <url-pattern>/admin/room/cteate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateRoomController</servlet-name>
+        <url-pattern>/admin/room/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteRoomController</servlet-name>
+        <url-pattern>/admin/room/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServiceController</servlet-name>
+        <url-pattern>/admin/service</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateServiceController</servlet-name>
+        <url-pattern>/admin/service/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteServiceController</servlet-name>
+        <url-pattern>/admin/service/remove</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateServiceController</servlet-name>
+        <url-pattern>/admin/service/update</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

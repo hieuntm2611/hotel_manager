@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.admin.roomstate;
+package controller.admin.customer;
 
 import controller.auth.BaseAuthController;
-import dal.room.RoomStateDBContext;
+import dal.service.CustomerDBContext;
 import dal.user.UserDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,28 +16,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.auth.User;
-import model.room.RoomState;
+import model.service.Customer;
 
 /**
  *
  * @author hieu2
  */
-public class RoomStateController extends BaseAuthController {
-    
+public class UpdateCustomerController extends BaseAuthController {
+
     @Override
     protected boolean isPermission(HttpServletRequest request) {
         UserDBContext userDB = new UserDBContext();
         User user = (User) request.getSession().getAttribute("user");
-        int num = userDB.hasPermission(user.getId(), "ROOMSTATE", "READ");
+        int num = userDB.hasPermission(user.getId(), "CUSTOMER", "UPDATE");
         return num >= 1;
     }
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RoomStateDBContext db = new RoomStateDBContext();
-        ArrayList<RoomState> roomStates = db.all();
-        request.setAttribute("roomStates", roomStates);
-        request.getRequestDispatcher("./").forward(request, response);
+        CustomerDBContext db = new CustomerDBContext();
+        ArrayList<Customer> customers = db.all();
+        request.setAttribute("customers", customers);
+        request.getRequestDispatcher("/").forward(request, response);
     }
 
     
@@ -54,12 +54,14 @@ public class RoomStateController extends BaseAuthController {
         processRequest(request, response);
     }
 
-    
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
     @Override
     public String getServletInfo() {
         return "Short description";
-    }
-
-    
+    }// </editor-fold>
 
 }

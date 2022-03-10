@@ -12,7 +12,6 @@ package model.room;
 public class Room {
     private int id;
     private String name;
-    private int floor;
     private int categoryId;
     private int roomstateId;
 
@@ -32,13 +31,6 @@ public class Room {
         this.name = name;
     }
 
-    public int getFloor() {
-        return floor;
-    }
-
-    public void setFloor(int floor) {
-        this.floor = floor;
-    }
 
     public int getCategoryId() {
         return categoryId;

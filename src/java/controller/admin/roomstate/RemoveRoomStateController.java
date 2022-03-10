@@ -22,32 +22,17 @@ import model.room.RoomState;
  *
  * @author hieu2
  */
-public class UpdateRoomStateController extends BaseAuthController {
-
+public class RemoveRoomStateController extends BaseAuthController {
+    
     @Override
     protected boolean isPermission(HttpServletRequest request) {
         UserDBContext userDB = new UserDBContext();
         User user = (User) request.getSession().getAttribute("user");
-        int num = userDB.hasPermission(user.getId(), "ROOMSTATE", "UPDATE");
+        int num = userDB.hasPermission(user.getId(), "ROOMSTATE", "REMOVE");
         return num >= 1;
     }
-    
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-    }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void processGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         RoomStateDBContext db = new RoomStateDBContext();
         ArrayList<RoomState> roomStates = db.all();
@@ -55,27 +40,21 @@ public class UpdateRoomStateController extends BaseAuthController {
         request.getRequestDispatcher("/").forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
+    @Override
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String rawId = request.getParameter("id");
-        String rawName = request.getParameter("name");
-        int id = Integer.parseInt(rawId);
-        String name = rawName;
-        RoomState r = new RoomState();
-        r.setId(id);
-        r.setName(name);
+        int id = Integer.parseInt(request.getParameter("id"));
         RoomStateDBContext db = new RoomStateDBContext();
-        db.update(r);
-        response.sendRedirect("./");
+        db.delete(id);
+        response.sendRedirect("/");
     }
 
     /**

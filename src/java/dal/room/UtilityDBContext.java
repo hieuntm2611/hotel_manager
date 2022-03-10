@@ -67,24 +67,121 @@ public class UtilityDBContext extends DBContext<Utility>{
 
     @Override
     public Utility get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "SELECT [id]\n" +
+                    "      ,[name]\n" +
+                    "  FROM [utility]"
+                + "where id =?";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                Utility utility = new Utility();
+                utility.setId(result.getInt("id"));
+                utility.setName(result.getString("name"));
+                return utility;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UtilityDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
 
 
     @Override
-    public void update(Utility model) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(Utility utility) {
+        String sql = "UPDATE [utility]\n" +
+                    "   SET [name] = ?\n" +
+                    " WHERE id=?";
+        PreparedStatement stm = null;
+        try {
+            stm = connection.prepareStatement(sql);
+            stm.setString(1, utility.getName());
+            stm.setInt(2, utility.getId());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UtilityDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            if (stm!=null) {
+                try {
+                    stm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UtilityDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UtilityDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }
 
     @Override
     public void delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "DELETE FROM [utility]\n" +
+                    "      WHERE id=?";
+        PreparedStatement stm = null;
+        try {
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UtilityDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            if (stm!=null) {
+                try {
+                    stm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UtilityDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UtilityDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        
     }
 
     @Override
-    public void insert(Utility model) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void insert(Utility u) {
+        String sql = "INSERT INTO [utility]\n" +
+                        "           ([name])\n" +
+                        "     VALUES\n" +
+                        "           (?)";
+        PreparedStatement stm = null;
+        try {
+            stm = connection.prepareStatement(sql);
+            stm.setString(1, u.getName());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UtilityDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            if (stm!=null) {
+                try {
+                    stm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UtilityDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UtilityDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }
 
     

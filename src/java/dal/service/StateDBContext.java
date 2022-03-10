@@ -66,18 +66,99 @@ public class StateDBContext extends DBContext<State>{
     }
 
     @Override
-    public void update(State model) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(State state) {
+        String sql = "UPDATE [state]\n" +
+                    "   SET [name] = ?\n" +
+                    " WHERE id =?";
+        PreparedStatement stm = null;
+        try {
+            stm = connection.prepareStatement(sql);
+            stm.setString(1, state.getName());
+            stm.setInt(2, state.getId());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(StateDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            if (stm!=null) {
+                try {
+                    stm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(StateDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(StateDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }
 
     @Override
     public void delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "DELETE FROM [state]\n" +
+                    "      WHERE id=?";
+        PreparedStatement stm = null;
+        try {
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(StateDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            if (stm!=null) {
+                try {
+                    stm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(StateDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(StateDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        
     }
 
     @Override
-    public void insert(State model) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void insert(State s) {
+        String sql = "INSERT INTO [state]\n" +
+                    "           ([name])\n" +
+                    "     VALUES\n" +
+                    "           (?)";
+        PreparedStatement stm = null;
+        try {
+            stm = connection.prepareStatement(sql);
+            stm.setString(1, s.getName());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(StateDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            if (stm!=null) {
+                try {
+                    stm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(StateDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(StateDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        
     }
     
 }

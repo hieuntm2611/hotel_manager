@@ -198,7 +198,7 @@ public class ServiceDBContext extends DBContext<Service>{
 
     @Override
     public void delete(int id) {
-        String sql = "DELETE FROM [dbo].[service]\n" +
+        String sql = "DELETE FROM [service]\n" +
                     "      WHERE id=?";
         PreparedStatement stm = null;
         try {
