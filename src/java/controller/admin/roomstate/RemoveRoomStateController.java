@@ -34,10 +34,10 @@ public class RemoveRoomStateController extends BaseAuthController {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
         RoomStateDBContext db = new RoomStateDBContext();
-        ArrayList<RoomState> roomStates = db.all();
-        request.setAttribute("roomStates", roomStates);
-        request.getRequestDispatcher("/").forward(request, response);
+        db.delete(id);
+        response.sendRedirect("/admin/room/state");
     }
 
     
@@ -51,10 +51,7 @@ public class RemoveRoomStateController extends BaseAuthController {
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        RoomStateDBContext db = new RoomStateDBContext();
-        db.delete(id);
-        response.sendRedirect("/");
+        processRequest(request, response);
     }
 
     /**

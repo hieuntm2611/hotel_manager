@@ -18,9 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.auth.User;
 import model.room.Room;
-import model.service.Customer;
-import model.service.Service;
-import model.service.State;
+import model.customer.Customer;
+import model.customer.Service;
+import model.customer.State;
 
 /**
  *

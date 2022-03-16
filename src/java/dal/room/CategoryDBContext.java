@@ -28,9 +28,7 @@ public class CategoryDBContext extends DBContext<Category>{
         String sql = "SELECT c.[id]\n" +
                         "      ,c.[name]\n" +
                         "      ,[price]\n" +
-                        "	  ,utility.[name]\n" +
-                        "  FROM [category] c inner join category_utility cu on c.id = cu.categoryId\n" +
-                        "  inner join utility on cu.utilityId = utility.id";
+                        "  FROM [category] c";
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(sql);
@@ -49,6 +47,7 @@ public class CategoryDBContext extends DBContext<Category>{
         }
         return categories;
     }
+    
 
     @Override
     public Category get(int id) {
@@ -56,9 +55,7 @@ public class CategoryDBContext extends DBContext<Category>{
         String sql = "SELECT c.[id]\n" +
                         "      ,c.[name]\n" +
                         "      ,[price]\n" +
-                        "	  ,utility.[name]\n" +
-                        "  FROM [category] c inner join category_utility cu on c.id = cu.categoryId\n" +
-                        "  inner join utility on cu.utilityId = utility.id"
+                        "  FROM [category] c "
                 + "where c.id =?";
         PreparedStatement statement = null;
         try {

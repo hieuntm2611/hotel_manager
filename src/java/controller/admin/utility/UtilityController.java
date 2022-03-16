@@ -31,12 +31,13 @@ public class UtilityController extends BaseAuthController {
         int num = userDB.hasPermission(user.getId(), "UTILITY", "READ");
         return num >= 1;
     }
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         UtilityDBContext db = new UtilityDBContext();
         ArrayList<Utility> utilitys = db.all();
         request.setAttribute("utilitys", utilitys);
-        request.getRequestDispatcher("/").forward(request, response);
+        request.getRequestDispatcher("/views/admin/utility/utility.jsp").forward(request, response);
     }
 
     

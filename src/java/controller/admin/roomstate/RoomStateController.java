@@ -37,7 +37,7 @@ public class RoomStateController extends BaseAuthController {
         RoomStateDBContext db = new RoomStateDBContext();
         ArrayList<RoomState> roomStates = db.all();
         request.setAttribute("roomStates", roomStates);
-        request.getRequestDispatcher("./").forward(request, response);
+        request.getRequestDispatcher("/views/admin/roomState/roomState.jsp").forward(request, response);
     }
 
     

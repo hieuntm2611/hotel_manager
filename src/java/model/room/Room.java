@@ -14,6 +14,26 @@ public class Room {
     private String name;
     private int categoryId;
     private int roomstateId;
+    private Category category;
+    private RoomState roomState;
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public RoomState getRoomState() {
+        return roomState;
+    }
+
+    public void setRoomState(RoomState roomState) {
+        this.roomState = roomState;
+    }
+    
+    
 
     public int getId() {
         return id;

@@ -35,9 +35,10 @@ public class UpdateUtilityController extends BaseAuthController {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         UtilityDBContext db = new UtilityDBContext();
-        ArrayList<Utility> utilitys = db.all();
-        request.setAttribute("utilitys", utilitys);
-        request.getRequestDispatcher("/").forward(request, response);
+        int id = Integer.parseInt(request.getParameter("id"));
+        Utility utility = db.get(id);
+        request.setAttribute("utility", utility);
+        request.getRequestDispatcher("/views/admin/utility/update.jsp").forward(request, response);
     }
 
     
@@ -52,14 +53,15 @@ public class UpdateUtilityController extends BaseAuthController {
     protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         UtilityDBContext db = new UtilityDBContext();
-        
-        int id = Integer.parseInt(request.getParameter("id"));
-        String name = request.getParameter("name");
+        String rawId = request.getParameter("id");
+        String rawName = new String(request.getParameter("name").getBytes("iso-8859-1"), "utf-8");
+        int id = Integer.parseInt(rawId);
+        String name = rawName;
         Utility u = new Utility();
         u.setId(id);
         u.setName(name);
         db.update(u);
-        response.sendRedirect("./");
+        response.sendRedirect("/admin/category/utility");
     }
 
     /**

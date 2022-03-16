@@ -70,10 +70,11 @@ public class UtilityDBContext extends DBContext<Utility>{
         String sql = "SELECT [id]\n" +
                     "      ,[name]\n" +
                     "  FROM [utility]"
-                + "where id =?";
+                + " where id =?";
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
             ResultSet result = statement.executeQuery();
             while (result.next()) {
                 Utility utility = new Utility();

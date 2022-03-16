@@ -9,10 +9,8 @@ import controller.auth.BaseAuthController;
 import dal.room.RoomStateDBContext;
 import dal.user.UserDBContext;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.auth.User;
@@ -37,37 +35,23 @@ public class UpdateRoomStateController extends BaseAuthController {
         
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
         RoomStateDBContext db = new RoomStateDBContext();
-        ArrayList<RoomState> roomStates = db.all();
-        request.setAttribute("roomStates", roomStates);
-        request.getRequestDispatcher("/").forward(request, response);
+        RoomState roomState = db.get(id);
+        request.setAttribute("roomState", roomState);
+        request.getRequestDispatcher("/views/admin/roomState/update.jsp").forward(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String rawId = request.getParameter("id");
-        String rawName = request.getParameter("name");
+        String rawName = new String(request.getParameter("name").getBytes("iso-8859-1"), "utf-8");
         int id = Integer.parseInt(rawId);
         String name = rawName;
         RoomState r = new RoomState();
@@ -75,7 +59,7 @@ public class UpdateRoomStateController extends BaseAuthController {
         r.setName(name);
         RoomStateDBContext db = new RoomStateDBContext();
         db.update(r);
-        response.sendRedirect("./");
+        response.sendRedirect("/admin/room/state");
     }
 
     /**

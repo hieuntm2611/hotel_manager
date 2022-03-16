@@ -12,118 +12,118 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import model.room.RoomState;
+import model.customer.State;
 
 /**
  *
  * @author hieu2
  */
-public class RoomStateDBContext extends DBContext<RoomState>{
+public class StateDBContext extends DBContext<State>{
 
     @Override
-    public ArrayList<RoomState> all() {
-        ArrayList<RoomState> rss = new ArrayList<>();
+    public ArrayList<State> all() {
+        ArrayList<State> states = new ArrayList<>();
         String sql = "SELECT [id]\n" +
                     "      ,[name]\n" +
-                    "  FROM [room_state]";
+                    "  FROM [state]";
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(sql);
             ResultSet result = statement.executeQuery();
             while (result.next()) {
-                RoomState rs = new RoomState();
-                rs.setId(result.getInt("id"));
-                rs.setName(result.getString("name"));
-                rss.add(rs);
+                State state = new State();
+                state.setId(result.getInt("id"));
+                state.setName(result.getString("name"));
+                states.add(state);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(RoomStateDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UtilityDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return rss;
+        return states;
     }
 
     @Override
-    public RoomState get(int id) {
+    public State get(int id) {
         String sql = "SELECT [id]\n" +
                     "      ,[name]\n" +
-                    "  FROM [room_state]"
-                + " where id=?";
+                    "  FROM [state]"
+                + " where id =?";
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(sql);
             statement.setInt(1, id);
             ResultSet result = statement.executeQuery();
-            if (result.next()) {
-                RoomState rs = new RoomState();
-                rs.setId(result.getInt("id"));
-                rs.setName(result.getString("name"));
-                return rs;
+            while (result.next()) {
+                State state = new State();
+                state.setId(result.getInt("id"));
+                state.setName(result.getString("name"));
+                return state;
             }
         } catch (SQLException ex) {
-            Logger.getLogger(RoomStateDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StateDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
 
     @Override
-    public void insert(RoomState rs) {
-        String sql = "INSERT INTO [room_state]\n" +
+    public void insert(State s) {
+        String sql = "INSERT INTO [rstate]\n" +
                         "           ([name])\n" +
                         "     VALUES\n" +
                         "           (?)";
         PreparedStatement stm = null;
         try {
             stm = connection.prepareStatement(sql);
-            stm.setString(1, rs.getName());
+            stm.setString(1, s.getName());
             stm.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(RoomStateDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StateDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             if (stm!=null) {
                 try {
                     stm.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(RoomStateDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(StateDBContext.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             if (connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(RoomStateDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(StateDBContext.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
     }
 
     @Override
-    public void update(RoomState roomState) {
-        String sql = "UPDATE [room_state]\n" +
-                        "   SET [name] = ?\n" +
-                        " WHERE id=?";
+    public void update(State state) {
+        String sql = "UPDATE [state]\n" +
+                    "   SET [name] = ?\n" +
+                    " WHERE id=?";
         PreparedStatement stm = null;
         try {
             stm = connection.prepareStatement(sql);
-            stm.setString(1, roomState.getName());
-            stm.setInt(2, roomState.getId());
+            stm.setString(1, state.getName());
+            stm.setInt(2, state.getId());
             stm.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(RoomStateDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StateDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             if (stm!=null) {
                 try {
                     stm.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(RoomStateDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(StateDBContext.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             if (connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(RoomStateDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(StateDBContext.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -131,7 +131,7 @@ public class RoomStateDBContext extends DBContext<RoomState>{
 
     @Override
     public void delete(int id) {
-        String sql = "DELETE FROM [room_state]\n" +
+        String sql = "DELETE FROM [state]\n" +
                     "      WHERE id=?";
         PreparedStatement stm = null;
         try {
@@ -139,25 +139,24 @@ public class RoomStateDBContext extends DBContext<RoomState>{
             stm.setInt(1, id);
             stm.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(RoomStateDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(StateDBContext.class.getName()).log(Level.SEVERE, null, ex);
         }
         finally{
             if (stm!=null) {
                 try {
                     stm.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(RoomStateDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(StateDBContext.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             if (connection != null) {
                 try {
                     connection.close();
                 } catch (SQLException ex) {
-                    Logger.getLogger(RoomStateDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(StateDBContext.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
+        
     }
-
-    
 }

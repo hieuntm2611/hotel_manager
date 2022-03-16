@@ -3,42 +3,40 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.admin.service;
+package controller.admin.state;
 
 import controller.auth.BaseAuthController;
-import dal.service.ServiceDBContext;
-import dal.user.UserDBContext;
+import dal.service.StateDBContext;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.auth.User;
-import model.customer.Service;
+import model.customer.State;
 
 /**
  *
  * @author hieu2
  */
-public class ServiceController extends BaseAuthController {
+public class UpdateStateController extends BaseAuthController {
 
+    
     @Override
     protected boolean isPermission(HttpServletRequest request) {
-        UserDBContext userDB = new UserDBContext();
-        User user = (User) request.getSession().getAttribute("user");
-        int num = userDB.hasPermission(user.getId(), "SERVICE", "READ");
-        return num >= 1;
+        return true;
     }
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ServiceDBContext db = new ServiceDBContext();
-        ArrayList<Service> services = db.all();
-        request.setAttribute("services", services);
-        request.getRequestDispatcher("/views/admin/service/service.jsp").forward(request, response);
-    
+        int id = Integer.parseInt(request.getParameter("id"));
+        StateDBContext db = new StateDBContext();
+        State state = db.get(id);
+        request.setAttribute("state", state);
+        request.getRequestDispatcher("/views/admin/state1/update.jsp").forward(request, response);
     }
 
+    
     
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response)
@@ -47,10 +45,20 @@ public class ServiceController extends BaseAuthController {
     }
 
     
+    
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        StateDBContext db = new StateDBContext();
+        String rawId = request.getParameter("id");
+        String rawName = new String(request.getParameter("name").getBytes("iso-8859-1"), "utf-8");
+        int id = Integer.parseInt(rawId);
+        String name = rawName;
+        State s = new State();
+        s.setId(id);
+        s.setName(name);
+        db.update(s);
+        response.sendRedirect("/admin/service/state");
     }
 
     /**

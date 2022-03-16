@@ -13,7 +13,9 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.auth.User;
+import model.room.Category;
 import model.room.Room;
+import model.room.RoomState;
 
 /**
  *
@@ -24,11 +26,17 @@ public class RoomDBContext extends DBContext<Room> {
     @Override
     public ArrayList all() {
         ArrayList<Room> rooms = new ArrayList<>();
-        String sql = "SELECT [id]\n" +
-                        "      ,[name]\n" +
-                        "      ,[categoryId]\n" +
-                        "      ,[roomstateId]\n" +
-                        "  FROM [room]";
+        String sql = "SELECT r.[id]\n" +
+                    "      ,r.[name]\n" +
+                    "      ,[categoryId]\n" +
+                    "	  ,c.[name] as cname\n" +
+                    "	  ,c.[price]\n" +
+                    "      ,[roomstateId]\n" +
+                    "	  ,rs.[name] as rsname\n" +
+                    "  FROM [room]r inner join category c \n" +
+                    "  on r.categoryId = c.id \n" +
+                    "  inner join room_state rs \n" +
+                    "  on rs.id = r.roomstateId";
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(sql);
@@ -39,6 +47,15 @@ public class RoomDBContext extends DBContext<Room> {
                 r.setName(result.getString("name"));
                 r.setCategoryId(result.getInt("categoryId"));
                 r.setRoomstateId(result.getInt("roomstateId"));
+                Category c = new Category();
+                c.setId(r.getCategoryId());
+                c.setName(result.getString("cname"));
+                c.setPrice(result.getDouble("price"));
+                r.setCategory(c);
+                RoomState rs = new RoomState();
+                rs.setId(r.getRoomstateId());
+                rs.setName(result.getString("rsname"));
+                r.setRoomState(rs);
                 rooms.add(r);
             }
         } catch (SQLException ex) {
@@ -50,12 +67,18 @@ public class RoomDBContext extends DBContext<Room> {
     @Override
     public Room get(int id) {
         
-    String sql = "SELECT [id]\n" +
-                        "      ,[name]\n" +
-                        "      ,[categoryId]\n" +
-                        "      ,[roomstateId]\n" +
-                        "  FROM [room]"
-            + "where id =?";
+    String sql = "SELECT r.[id]\n" +
+                    "      ,r.[name]\n" +
+                    "      ,[categoryId]\n" +
+                    "	  ,c.[name] as cname\n" +
+                    "	  ,c.[price]\n" +
+                    "      ,[roomstateId]\n" +
+                    "	  ,rs.[name] as rsname\n" +
+                    "  FROM [room]r inner join category c \n" +
+                    "  on r.categoryId = c.id \n" +
+                    "  inner join room_state rs \n" +
+                    "  on rs.id = r.roomstateId"
+            + " where id = ?";
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(sql);
@@ -67,6 +90,15 @@ public class RoomDBContext extends DBContext<Room> {
                 r.setName(result.getString("name"));
                 r.setCategoryId(result.getInt("categoryId"));
                 r.setRoomstateId(result.getInt("roomstateId"));
+                Category c = new Category();
+                c.setId(r.getCategoryId());
+                c.setName(result.getString("cname"));
+                c.setPrice(result.getDouble("price"));
+                r.setCategory(c);
+                RoomState rs = new RoomState();
+                rs.setId(r.getRoomstateId());
+                rs.setName(result.getString("rsname"));
+                r.setRoomState(rs);
                 return r;
             }
         } catch (SQLException ex) {

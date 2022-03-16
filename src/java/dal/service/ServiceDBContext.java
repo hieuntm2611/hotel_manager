@@ -14,9 +14,9 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.room.Room;
-import model.service.Customer;
-import model.service.Service;
-import model.service.State;
+import model.customer.Customer;
+import model.customer.Service;
+import model.customer.State;
 
 /**
  *
@@ -39,7 +39,6 @@ public class ServiceDBContext extends DBContext<Service>{
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(sql);
-            
             ResultSet result = statement.executeQuery();
             while (result.next()) {
                 Service service = new Service();

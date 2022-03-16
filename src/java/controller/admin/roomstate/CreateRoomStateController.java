@@ -44,23 +44,20 @@ public class CreateRoomStateController extends BaseAuthController {
         RoomStateDBContext db = new RoomStateDBContext();
         ArrayList<RoomState> roomStates = db.all();
         request.setAttribute("roomStates", roomStates);
-        request.getRequestDispatcher("/").forward(request, response);
+        request.getRequestDispatcher("/views/admin/roomState/create.jsp").forward(request, response);
     }
 
     
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String rawId = request.getParameter("id");
-        String rawName = request.getParameter("name");
-        int id = Integer.parseInt(rawId);
+        String rawName = new String(request.getParameter("name").getBytes("iso-8859-1"), "utf-8");
         String name = rawName;
         RoomState r = new RoomState();
-        r.setId(id);
         r.setName(name);
         RoomStateDBContext db = new RoomStateDBContext();
         db.insert(r);
-        response.sendRedirect("./");
+        response.sendRedirect("/admin/room/state");
     }
 
     /**

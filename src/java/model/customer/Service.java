@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.service;
+package model.customer;
 
 import java.sql.Date;
 import model.room.Room;
@@ -85,7 +85,5 @@ public class Service {
     public void setUpdate(Date update) {
         this.update = update;
     }
-    
-    
-    
+
 }

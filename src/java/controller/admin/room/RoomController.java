@@ -44,7 +44,7 @@ public class RoomController extends BaseAuthController {
         RoomDBContext db = new RoomDBContext();
         ArrayList<Room> rooms = db.all();
         request.setAttribute("rooms", rooms);
-        request.getRequestDispatcher("/").forward(request, response);
+        request.getRequestDispatcher("/views/admin/room/rooms.jsp").forward(request, response);
     }
 
     

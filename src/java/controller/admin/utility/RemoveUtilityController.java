@@ -9,10 +9,8 @@ import controller.auth.BaseAuthController;
 import dal.room.UtilityDBContext;
 import dal.user.UserDBContext;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.auth.User;
@@ -34,10 +32,11 @@ public class RemoveUtilityController extends BaseAuthController {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String rawid = request.getParameter("id");
+        int id = Integer.parseInt(rawid);
         UtilityDBContext db = new UtilityDBContext();
-        ArrayList<Utility> utilitys = db.all();
-        request.setAttribute("utilitys", utilitys);
-        request.getRequestDispatcher("/").forward(request, response);
+        db.delete(id);
+        response.sendRedirect("/admin/category/utility");
     }
 
     
@@ -51,11 +50,7 @@ public class RemoveUtilityController extends BaseAuthController {
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String rawid = request.getParameter("id");
-        int id = Integer.parseInt(rawid);
-        UtilityDBContext db = new UtilityDBContext();
-        db.delete(id);
-        response.sendRedirect("./");
+        processRequest(request, response);        
     }
 
     /**
