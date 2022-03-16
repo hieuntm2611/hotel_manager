@@ -25,22 +25,6 @@
         <servlet-class>controller.admin.roomstate.CreateRoomStateController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>StateController</servlet-name>
-        <servlet-class>controller.admin.state.StateController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>CreateStateController</servlet-name>
-        <servlet-class>controller.admin.state.CreateStateController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>DeleteStateController</servlet-name>
-        <servlet-class>controller.admin.state.DeleteStateController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>UpdateStateController</servlet-name>
-        <servlet-class>controller.admin.state.UpdateStateController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>UtilityController</servlet-name>
         <servlet-class>controller.admin.utility.UtilityController</servlet-class>
     </servlet>
@@ -120,6 +104,30 @@
         <servlet-name>UpdateServiceController</servlet-name>
         <servlet-class>controller.admin.service.UpdateServiceController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CheckOutController</servlet-name>
+        <servlet-class>controller.hotel.CheckOutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HistoryCheckOutController</servlet-name>
+        <servlet-class>controller.hotel.HistoryCheckOutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StateController</servlet-name>
+        <servlet-class>controller.admin.state.StateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateStateController</servlet-name>
+        <servlet-class>controller.admin.state.UpdateStateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteStateController</servlet-name>
+        <servlet-class>controller.admin.state.RemoveStateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateStateController</servlet-name>
+        <servlet-class>controller.admin.state.CreateStateController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/admin/login</url-pattern>
@@ -143,22 +151,6 @@
     <servlet-mapping>
         <servlet-name>CreateRoomStateController</servlet-name>
         <url-pattern>/admin/room/state/create</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>StateController</servlet-name>
-        <url-pattern>/admin/service/state</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CreateStateController</servlet-name>
-        <url-pattern>/admin/service/state/create</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DeleteStateController</servlet-name>
-        <url-pattern>/admin/service/state/delete</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UpdateStateController</servlet-name>
-        <url-pattern>/admin/service/state/update</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UtilityController</servlet-name>
@@ -239,6 +231,30 @@
     <servlet-mapping>
         <servlet-name>UpdateServiceController</servlet-name>
         <url-pattern>/admin/service/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckOutController</servlet-name>
+        <url-pattern>/admin/checkout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HistoryCheckOutController</servlet-name>
+        <url-pattern>/admin/history</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StateController</servlet-name>
+        <url-pattern>/admin/service/state</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateStateController</servlet-name>
+        <url-pattern>/admin/service/state/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteStateController</servlet-name>
+        <url-pattern>/admin/service/state/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateStateController</servlet-name>
+        <url-pattern>/admin/service/state/create</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
