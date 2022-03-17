@@ -35,9 +35,9 @@ public class RemoveCustomerController extends BaseAuthController {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         CustomerDBContext db = new CustomerDBContext();
-        ArrayList<Customer> customers = db.all();
-        request.setAttribute("customers", customers);
-        request.getRequestDispatcher("/").forward(request, response);
+        int id = Integer.parseInt(request.getParameter("id"));
+        db.delete(id);
+        response.sendRedirect("/admin/customer");
     }
 
     

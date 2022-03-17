@@ -37,7 +37,7 @@ public class CustomerController extends BaseAuthController {
         CustomerDBContext db = new CustomerDBContext();
         ArrayList<Customer> customers = db.all();
         request.setAttribute("customers", customers);
-        request.getRequestDispatcher("/").forward(request, response);
+        request.getRequestDispatcher("/views/admin/customer/customer.jsp").forward(request, response);
     }
 
     

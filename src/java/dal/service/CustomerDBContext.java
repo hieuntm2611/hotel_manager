@@ -161,7 +161,6 @@ public class CustomerDBContext extends DBContext<Customer>{
     public void update(Customer customer) {
         String sql = "UPDATE [dbo].[customer]\n" +
                     "   SET [name] = ?" +
-                    "      ,[gender] = ?" +
                     "      ,[phone_number] = ?" +
                     "      ,[cmnd] = ?" +
                     "      ,[email] = ?" +
@@ -170,11 +169,10 @@ public class CustomerDBContext extends DBContext<Customer>{
         try {
             stm = connection.prepareStatement(sql);
             stm.setString(1, customer.getName());
-            stm.setBoolean(2, customer.isGender());
-            stm.setString(3, customer.getPhone());
-            stm.setString(4, customer.getCmnd());
-            stm.setString(5, customer.getEmail());
-            stm.setInt(6, customer.getId());
+            stm.setString(2, customer.getPhone());
+            stm.setString(3, customer.getCmnd());
+            stm.setString(4, customer.getEmail());
+            stm.setInt(5, customer.getId());
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(CustomerDBContext.class.getName()).log(Level.SEVERE, null, ex);

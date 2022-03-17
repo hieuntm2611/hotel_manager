@@ -137,7 +137,6 @@ public class CategoryDBContext extends DBContext<Category> {
                 }
             }
         }
-
     }
 
     @Override
@@ -173,6 +172,45 @@ public class CategoryDBContext extends DBContext<Category> {
             }
         }
     }
+    
+    public int insertGetId(Category c) {
+        String sql = "INSERT INTO [category]\n"
+                + "           ([name]\n"
+                + "           ,[price])\n"
+                + "     VALUES\n"
+                + "           (?\n"
+                + "           ,?)";
+        PreparedStatement stm = null;
+        try {
+            stm = connection.prepareStatement(sql, stm.RETURN_GENERATED_KEYS);
+            stm.setString(1, c.getName());
+            stm.setDouble(2, c.getPrice());
+            stm.executeUpdate();
+            ResultSet rs = stm.getGeneratedKeys();
+            if(rs.next()){
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (stm != null) {
+                try {
+                    stm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return 0;
+    }
+    
     public int getMaxId(){
         String sql = "SELECT TOP (1) [id]\n" +
                     "  FROM [category]\n" +

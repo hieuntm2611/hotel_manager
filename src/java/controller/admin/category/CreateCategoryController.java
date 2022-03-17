@@ -60,11 +60,8 @@ public class CreateCategoryController extends BaseAuthController {
         category.setName(name);
         category.setPrice(price);
         CategoryDBContext db = new CategoryDBContext();
-        db.insert(category);
-        response.sendRedirect("/admin/category/aftercreate");
-
-        
-        
+        int id = db.insertGetId(category);
+        response.sendRedirect("/admin/category/update?id="+id);    
     }
 
     /**

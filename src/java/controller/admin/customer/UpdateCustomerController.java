@@ -34,10 +34,11 @@ public class UpdateCustomerController extends BaseAuthController {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
         CustomerDBContext db = new CustomerDBContext();
-        ArrayList<Customer> customers = db.all();
-        request.setAttribute("customers", customers);
-        request.getRequestDispatcher("/").forward(request, response);
+        Customer customer = db.get(id);
+        request.setAttribute("customer", customer);
+        request.getRequestDispatcher("/views/admin/customer/update.jsp").forward(request, response);
     }
 
     
@@ -51,7 +52,22 @@ public class UpdateCustomerController extends BaseAuthController {
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        int id = Integer.parseInt(request.getParameter("id"));
+        String rawName = new String(request.getParameter("name").getBytes("iso-8859-1"), "utf-8");
+        String name = rawName;
+        String phone = request.getParameter("phone");
+        String email = request.getParameter("email");
+        String cmnd = request.getParameter("cmnd");
+        Customer cus = new Customer();
+        cus.setId(id);
+        cus.setCmnd(cmnd);
+        cus.setEmail(email);
+        cus.setName(name);
+        cus.setPhone(phone);
+        CustomerDBContext db = new CustomerDBContext();
+        db.update(cus);
+        response.sendRedirect("/admin/customer");
+        
     }
 
     /**

@@ -37,7 +37,7 @@ public class CreateCustomerController extends BaseAuthController {
         CustomerDBContext db = new CustomerDBContext();
         ArrayList<Customer> customers = db.all();
         request.setAttribute("customers", customers);
-        request.getRequestDispatcher("/").forward(request, response);
+        request.getRequestDispatcher("/views/admin/customer/create.jsp").forward(request, response);
     }
 
     
@@ -55,7 +55,9 @@ public class CreateCustomerController extends BaseAuthController {
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
         String cmnd = request.getParameter("cmnd");
-        boolean gender = Boolean.getBoolean(request.getParameter("gender"));
+        String rawgender = request.getParameter("gender");
+        boolean gender = (rawgender.equals("male"))? true:false;
+        
         Customer customer = new Customer();
         customer.setName(name);
         customer.setCmnd(cmnd);
@@ -64,7 +66,7 @@ public class CreateCustomerController extends BaseAuthController {
         customer.setPhone(phone);
         CustomerDBContext db = new CustomerDBContext();
         db.insert(customer);
-        response.sendRedirect("./");
+        response.sendRedirect("/admin/customer");
     }
 
     /**

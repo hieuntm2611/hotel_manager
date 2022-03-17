@@ -2,6 +2,21 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/dal/service/CustomerDBContext.java</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/admin/customer/UpdateCustomerController.java</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/admin/roomstate/RoomStateController.java</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/web/views/admin/main/slidebar.jsp</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/web/views/admin/state1/create.jsp</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/web/views/admin/customer/create.jsp</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/admin/customer/CustomerController.java</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/web/views/admin/customer/update.jsp</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/model/customer/Customer.java</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/web/views/admin/customer/customer.jsp</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/web/views/admin/category/category.jsp</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/web/views/admin/state1/update.jsp</file>
+            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/admin/customer/CreateCustomerController.java</file>
+        </group>
     </open-files>
 </project-private>
