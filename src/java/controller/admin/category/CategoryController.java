@@ -38,7 +38,7 @@ public class CategoryController extends BaseAuthController {
         CategoryDBContext db = new CategoryDBContext();
         ArrayList<Category> categorys = db.all();
         request.setAttribute("categorys", categorys);
-        request.getRequestDispatcher("/").forward(request, response);
+        request.getRequestDispatcher("/views/admin/category/category.jsp").forward(request, response);
     }
 
     

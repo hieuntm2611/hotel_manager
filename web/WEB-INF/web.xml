@@ -128,6 +128,14 @@
         <servlet-name>CreateStateController</servlet-name>
         <servlet-class>controller.admin.state.CreateStateController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateAfterCreate</servlet-name>
+        <servlet-class>controller.admin.category.UpdateAfterCreate</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AfterCreate</servlet-name>
+        <servlet-class>controller.admin.category.AfterCreate</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/admin/login</url-pattern>
@@ -255,6 +263,14 @@
     <servlet-mapping>
         <servlet-name>CreateStateController</servlet-name>
         <url-pattern>/admin/service/state/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateAfterCreate</servlet-name>
+        <url-pattern>/admin/category/updatecreate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AfterCreate</servlet-name>
+        <url-pattern>/admin/category/aftercreate</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

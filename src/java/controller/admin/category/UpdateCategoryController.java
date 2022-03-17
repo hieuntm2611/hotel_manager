@@ -7,6 +7,8 @@ package controller.admin.category;
 
 import controller.auth.BaseAuthController;
 import dal.room.CategoryDBContext;
+import dal.room.CategoryUtilityDBContext;
+import dal.room.UtilityDBContext;
 import dal.user.UserDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,10 +36,14 @@ public class UpdateCategoryController extends BaseAuthController {
     }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
         CategoryDBContext db = new CategoryDBContext();
-        ArrayList<Category> categorys = db.all();
-        request.setAttribute("categorys", categorys);
-        request.getRequestDispatcher("/").forward(request, response);
+        Category category = db.get(id);
+        UtilityDBContext udb = new UtilityDBContext();
+        ArrayList<Utility> utilitys = udb.all();
+        request.setAttribute("utilitys", utilitys);
+        request.setAttribute("category", category);
+        request.getRequestDispatcher("/views/admin/category/update.jsp").forward(request, response);
     }
 
     
@@ -51,20 +57,29 @@ public class UpdateCategoryController extends BaseAuthController {
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Category category = new Category();
-        String name = request.getParameter("name");
+        String rawId = request.getParameter("id");
+        CategoryDBContext db = new CategoryDBContext();
+        int id = Integer.parseInt(rawId);
+        Category category = db.get(id);
+        String rawName = new String(request.getParameter("name").getBytes("iso-8859-1"), "utf-8");
+        String name = rawName;
         double price = Double.parseDouble(request.getParameter("price"));
         String[] raw_utility = request.getParameterValues("utility");
+        for (Utility utility : category.getUtilities()) {
+            CategoryUtilityDBContext categoryDB = new CategoryUtilityDBContext();
+            categoryDB.delete(id, utility.getId());
+        }
+        category.getUtilities().clear();
         for (String string : raw_utility) {
             Utility u = new Utility();
             u.setId(Integer.parseInt(string));
-            category.getUtilities().add(u);
+            CategoryUtilityDBContext categoryDB = new CategoryUtilityDBContext();
+            categoryDB.insert(id, u.getId());
         }
         category.setName(name);
         category.setPrice(price);
-        CategoryDBContext db = new CategoryDBContext();
         db.update(category);
-        response.sendRedirect("./");
+        response.sendRedirect("/admin/category");
     }
 
     /**

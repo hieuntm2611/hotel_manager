@@ -12,7 +12,7 @@ package model.room;
 public class Utility {
     private int id;
     private String name;
-
+   
     public int getId() {
         return id;
     }

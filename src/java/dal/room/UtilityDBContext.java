@@ -41,6 +41,7 @@ public class UtilityDBContext extends DBContext<Utility>{
         }
         return utilities;
     }
+    
     public ArrayList<Utility> getUtilitiesByCategory(int id){
         ArrayList<Utility> utilities = new ArrayList<>();
         String sql = "SELECT u.id\n" +

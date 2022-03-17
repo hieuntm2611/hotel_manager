@@ -49,4 +49,13 @@ public class Category {
         this.utilities = utilities;
     }
     
+    public boolean checkUtiliti(int utilitiId){
+        for (Utility utility : utilities) {
+            if(utility.getId()==utilitiId){
+                return true;
+            }
+        }
+        return false;
+    }
+    
 }

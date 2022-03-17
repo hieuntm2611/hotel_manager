@@ -19,16 +19,16 @@ import model.room.Utility;
  *
  * @author hieu2
  */
-public class CategoryDBContext extends DBContext<Category>{
+public class CategoryDBContext extends DBContext<Category> {
 
     @Override
     public ArrayList<Category> all() {
         ArrayList<Category> categories = new ArrayList<>();
         UtilityDBContext db = new UtilityDBContext();
-        String sql = "SELECT c.[id]\n" +
-                        "      ,c.[name]\n" +
-                        "      ,[price]\n" +
-                        "  FROM [category] c";
+        String sql = "SELECT c.[id]\n"
+                + "      ,c.[name]\n"
+                + "      ,[price]\n"
+                + "  FROM [category] c";
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(sql);
@@ -47,15 +47,14 @@ public class CategoryDBContext extends DBContext<Category>{
         }
         return categories;
     }
-    
 
     @Override
     public Category get(int id) {
         UtilityDBContext db = new UtilityDBContext();
-        String sql = "SELECT c.[id]\n" +
-                        "      ,c.[name]\n" +
-                        "      ,[price]\n" +
-                        "  FROM [category] c "
+        String sql = "SELECT c.[id]\n"
+                + "      ,c.[name]\n"
+                + "      ,[price]\n"
+                + "  FROM [category] c \n"
                 + "where c.id =?";
         PreparedStatement statement = null;
         try {
@@ -76,14 +75,14 @@ public class CategoryDBContext extends DBContext<Category>{
         }
         return null;
     }
-    
 
     @Override
     public void update(Category c) {
-        String sql = "UPDATE [category]\n" +
-                        "   SET [name] = ?\n" +
-                        "      ,[price] = ?\n" +
-                        " WHERE id=?";
+        UtilityDBContext utilityDB = new UtilityDBContext();
+        String sql = "UPDATE [category]\n"
+                + "   SET [name] = ?\n"
+                + "      ,[price] = ?\n"
+                + " WHERE id=?";
         PreparedStatement stm = null;
         try {
             stm = connection.prepareStatement(sql);
@@ -93,9 +92,8 @@ public class CategoryDBContext extends DBContext<Category>{
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        finally{
-            if (stm!=null) {
+        } finally {
+            if (stm != null) {
                 try {
                     stm.close();
                 } catch (SQLException ex) {
@@ -114,8 +112,8 @@ public class CategoryDBContext extends DBContext<Category>{
 
     @Override
     public void delete(int id) {
-        String sql = "DELETE FROM [category]\n" +
-                    "      WHERE id=?";
+        String sql = "DELETE FROM [category]\n"
+                + "      WHERE id=?";
         PreparedStatement stm = null;
         try {
             stm = connection.prepareStatement(sql);
@@ -123,9 +121,8 @@ public class CategoryDBContext extends DBContext<Category>{
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        finally{
-            if (stm!=null) {
+        } finally {
+            if (stm != null) {
                 try {
                     stm.close();
                 } catch (SQLException ex) {
@@ -140,17 +137,17 @@ public class CategoryDBContext extends DBContext<Category>{
                 }
             }
         }
-        
+
     }
 
     @Override
     public void insert(Category c) {
-        String sql = "INSERT INTO [category]\n" +
-                        "           ([name]\n" +
-                        "           ,[price])\n" +
-                        "     VALUES\n" +
-                        "           (?\n" +
-                        "           ,?)";
+        String sql = "INSERT INTO [category]\n"
+                + "           ([name]\n"
+                + "           ,[price])\n"
+                + "     VALUES\n"
+                + "           (?\n"
+                + "           ,?)";
         PreparedStatement stm = null;
         try {
             stm = connection.prepareStatement(sql);
@@ -159,9 +156,8 @@ public class CategoryDBContext extends DBContext<Category>{
             stm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        finally{
-            if (stm!=null) {
+        } finally {
+            if (stm != null) {
                 try {
                     stm.close();
                 } catch (SQLException ex) {
@@ -177,5 +173,22 @@ public class CategoryDBContext extends DBContext<Category>{
             }
         }
     }
-    
+    public int getMaxId(){
+        String sql = "SELECT TOP (1) [id]\n" +
+                    "  FROM [category]\n" +
+                    "  order by id desc";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            if (result.next()) {
+                int id = Integer.parseInt(result.getString("id"));
+                return id;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return -1;
+    }
+
 }

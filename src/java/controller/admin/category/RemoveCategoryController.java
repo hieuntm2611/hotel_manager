@@ -7,6 +7,7 @@ package controller.admin.category;
 
 import controller.auth.BaseAuthController;
 import dal.room.CategoryDBContext;
+import dal.room.CategoryUtilityDBContext;
 import dal.user.UserDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,10 +35,12 @@ public class RemoveCategoryController extends BaseAuthController {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        CategoryUtilityDBContext cudb = new CategoryUtilityDBContext();
+        cudb.delete(id);
         CategoryDBContext db = new CategoryDBContext();
-        ArrayList<Category> categorys = db.all();
-        request.setAttribute("categorys", categorys);
-        request.getRequestDispatcher("/").forward(request, response);
+        db.delete(id);
+        response.sendRedirect("/admin/category");
     }
 
     
@@ -52,10 +55,7 @@ public class RemoveCategoryController extends BaseAuthController {
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        CategoryDBContext db = new CategoryDBContext();
-        int id = Integer.parseInt(request.getParameter("id"));
-        db.delete(id);
-        response.sendRedirect("./");
+        processRequest(request, response);
     }
 
     /**
