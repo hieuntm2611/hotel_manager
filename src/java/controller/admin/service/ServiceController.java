@@ -36,7 +36,6 @@ public class ServiceController extends BaseAuthController {
         ArrayList<Service> services = db.all();
         request.setAttribute("services", services);
         request.getRequestDispatcher("/views/admin/service/service.jsp").forward(request, response);
-    
     }
 
     

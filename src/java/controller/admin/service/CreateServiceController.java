@@ -6,7 +6,10 @@
 package controller.admin.service;
 
 import controller.auth.BaseAuthController;
+import dal.room.RoomDBContext;
+import dal.service.CustomerDBContext;
 import dal.service.ServiceDBContext;
+import dal.service.StateDBContext;
 import dal.user.UserDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -35,12 +38,17 @@ public class CreateServiceController extends BaseAuthController {
         int num = userDB.hasPermission(user.getId(), "SERVICE", "CREATE");
         return num >= 1;
     }
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ServiceDBContext db = new ServiceDBContext();
-        ArrayList<Service> services = db.all();
-        request.setAttribute("services", services);
-        request.getRequestDispatcher("/").forward(request, response);
+        StateDBContext statedb = new StateDBContext();
+        ArrayList<State> states = statedb.all();
+        request.setAttribute("states", states);
+        RoomDBContext roomdb = new RoomDBContext();
+        ArrayList<Room> rooms = roomdb.allHaveRoom();
+        request.setAttribute("rooms", rooms);
+        request.getRequestDispatcher("/views/admin/service/create.jsp").forward(request, response);
     }
 
     @Override
@@ -49,31 +57,42 @@ public class CreateServiceController extends BaseAuthController {
         processRequest(request, response);
     }
 
-    
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Room room = new Room();
-        room.setId(Integer.parseInt(request.getParameter("roomid")));
+        room.setId(Integer.parseInt(request.getParameter("room")));
+        String name = request.getParameter("name");
+        String phone = request.getParameter("phone");
+        String email = request.getParameter("email");
+        String cmnd = request.getParameter("cmnd");
+        String rawgender = request.getParameter("gender");
+        boolean gender = (rawgender.equals("male"))? true:false;
+        
         Customer customer = new Customer();
-        customer.setId(Integer.parseInt(request.getParameter("customerid")));
+        customer.setName(name);
+        customer.setCmnd(cmnd);
+        customer.setEmail(email);
+        customer.setGender(gender);
+        customer.setPhone(phone);
+        CustomerDBContext customerdb = new CustomerDBContext();
+        int customer_id = customerdb.insertHaveId(customer);
+        customer.setId(customer_id);
         State state = new State();
-        state.setId(Integer.parseInt(request.getParameter("stateid")));
-        Date start = Date.valueOf(request.getParameter("start"));
-        Date end = Date.valueOf(request.getParameter("end"));
-        Date create = Date.valueOf(request.getParameter("create"));
-        Date update = Date.valueOf(request.getParameter("update"));
+        state.setId(Integer.parseInt(request.getParameter("state")));
+        Date start = Date.valueOf(request.getParameter("start_date"));
+        Date end = Date.valueOf(request.getParameter("end_date"));
         Service s = new Service();
         s.setRoom(room);
-        s.setCreate(create);
+        s.setCreate(new Date(new java.util.Date().getTime()));
         s.setCustomer(customer);
         s.setEnd(end);
         s.setStart(start);
         s.setState(state);
-        s.setUpdate(update);
+        s.setUpdate(new Date(new java.util.Date().getTime()));
         ServiceDBContext db = new ServiceDBContext();
         db.insert(s);
-        response.sendRedirect("./");
+        response.sendRedirect("/admin/service");
     }
 
     /**

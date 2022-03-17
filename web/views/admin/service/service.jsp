@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,7 +18,12 @@
             <div class="w-64 bg-gray-50" style="width: 290px">
                 <jsp:include page="../main/slidebar.jsp" />
             </div>
-            <div class="w-full px-5">
+            <div class="w-full px-5 py-5">
+                <div class="flex justify-end">
+                    <a href="/admin/service/create" type="button" data-mdb-ripple="true" data-mdb-ripple-color="light" class="inline-block px-6 py-2.5 mb-2 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out" style="background-color: #1877f2;">
+                        Add
+                    </a>
+                </div>
                 <div class="flex flex-col">
                     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -80,13 +86,13 @@
                                                 ${service.customer.gender}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                ${service.customer.start}
+                                                ${service.start}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                ${service.customer.end}
+                                                ${service.end}
                                             </td>
                                             <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                ${service.customer.state}
+                                                ${service.state.name}
                                             </td>
                                         </tr>
                                     </c:forEach>

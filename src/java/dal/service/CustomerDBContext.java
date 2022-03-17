@@ -124,6 +124,55 @@ public class CustomerDBContext extends DBContext<Customer>{
         }
         
     }
+    
+    
+    public int insertHaveId(Customer customer){
+        String sql = "INSERT INTO [dbo].[customer]\n" +
+                    "           ([name]\n" +
+                    "           ,[gender]\n" +
+                    "           ,[phone_number]\n" +
+                    "           ,[cmnd]\n" +
+                    "           ,[email])\n" +
+                    "     VALUES\n" +
+                    "           (?\n" +
+                    "           ,?\n" +
+                    "           ,?\n" +
+                    "           ,?\n" +
+                    "           ,?)";
+        PreparedStatement stm = null;
+        try {
+            stm = connection.prepareStatement(sql, stm.RETURN_GENERATED_KEYS);
+            stm.setString(1, customer.getName());
+            stm.setBoolean(2, customer.isGender());
+            stm.setString(3, customer.getPhone());
+            stm.setString(4, customer.getCmnd());
+            stm.setString(5, customer.getEmail());
+            stm.executeUpdate();
+            ResultSet rs = stm.getGeneratedKeys();
+            if(rs.next()){
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        finally{
+            if (stm!=null) {
+                try {
+                    stm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(CustomerDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(CustomerDBContext.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return 0;
+    }
 
     @Override
     public Customer get(int id) {
