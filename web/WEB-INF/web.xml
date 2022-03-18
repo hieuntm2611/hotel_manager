@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>filter.AuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+        <url-pattern>/admin/*</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>LoginController</servlet-name>
         <servlet-class>controller.auth.LoginController</servlet-class>
@@ -136,6 +144,18 @@
         <servlet-name>AfterCreate</servlet-name>
         <servlet-class>controller.admin.category.AfterCreate</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetServiceByRoomSetted</servlet-name>
+        <servlet-class>controller.admin.service.GetServiceByRoomSetted</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckoutController</servlet-name>
+        <servlet-class>controller.admin.service.CheckoutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckoutHistory</servlet-name>
+        <servlet-class>controller.admin.service.CheckoutHistory</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/admin/login</url-pattern>
@@ -271,6 +291,18 @@
     <servlet-mapping>
         <servlet-name>AfterCreate</servlet-name>
         <url-pattern>/admin/category/aftercreate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetServiceByRoomSetted</servlet-name>
+        <url-pattern>/admin/service/roomsetted</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckoutController</servlet-name>
+        <url-pattern>/admin/service/checkout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckoutHistory</servlet-name>
+        <url-pattern>/admin/checkout/history</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -17,6 +17,7 @@ import model.room.Room;
 import model.customer.Customer;
 import model.customer.Service;
 import model.customer.State;
+import model.room.Category;
 
 /**
  *
@@ -51,6 +52,194 @@ public class ServiceDBContext extends DBContext<Service> {
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                Service service = new Service();
+                service.setId(result.getInt("id"));
+                service.setStart(result.getDate("startDate"));
+                service.setEnd(result.getDate("endDate"));
+                service.setCreate(result.getDate("dateCreate"));
+                service.setUpdate(result.getDate("dateUpdate"));
+                Customer customer = new Customer();
+                customer.setId(result.getInt("customer_id"));
+                customer.setName(result.getString("customer_name"));
+                customer.setCmnd(result.getString("cmnd"));
+                customer.setEmail(result.getString("email"));
+                customer.setGender(result.getBoolean("gender"));
+                customer.setPhone(result.getString("phone_number"));
+                service.setCustomer(customer);
+                State state = new State();
+                state.setId(result.getInt("state_id"));
+                state.setName(result.getString("state_name"));
+                service.setState(state);
+                Room room = new Room();
+                room.setId(result.getInt("room_id"));
+                room.setName(result.getString("room_name"));
+                service.setRoom(room);
+                services.add(service);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return services;
+    }
+    
+    public ArrayList<Service> getServices() {
+        ArrayList<Service> services = new ArrayList<>();
+        String sql = "SELECT s.[id]\n"
+                + "      ,s.[startDate]\n"
+                + "      ,s.[endDate]\n"
+                + "      ,s.[dateCreate]\n"
+                + "      ,s.[dateUpdate]\n"
+                + "      ,s.[roomId]\n"
+                + "	  ,c.id as 'customer_id'\n"
+                + "      ,c.[name] as 'customer_name'\n"
+                + "	  ,c.phone_number\n"
+                + "	  ,c.gender\n"
+                + "	  ,c.cmnd\n"
+                + "	  ,c.email\n"
+                + "	  ,st.id as 'state_id'\n"
+                + "       ,st.[name] as 'state_name'\n"
+                + "	  ,r.id as 'room_id'\n"
+                + "	  ,r.[name] as 'room_name'\n"
+                + "       ,cate.id as cateid \n"
+                + "       ,cate.name as catename \n"
+                + "       ,cate.price as cateprice \n"
+                + "  FROM [service] s inner join customer c \n"
+                + "  on s.customerId = c.id \n"
+                + "  inner join [state] st\n"
+                + "  on s.stateId = st.id\n"
+                + "  inner join room as r on r.id = s.roomId\n"
+                + " inner join category as cate on cate.id = r.categoryId \n"
+                + " WHERE LOWER(st.[name]) != LOWER(N'Đã trả phòng') AND LOWER(st.[name]) != LOWER(N'Hủy')";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                Service service = new Service();
+                service.setId(result.getInt("id"));
+                service.setStart(result.getDate("startDate"));
+                service.setEnd(result.getDate("endDate"));
+                service.setCreate(result.getDate("dateCreate"));
+                service.setUpdate(result.getDate("dateUpdate"));
+                Customer customer = new Customer();
+                customer.setId(result.getInt("customer_id"));
+                customer.setName(result.getString("customer_name"));
+                customer.setCmnd(result.getString("cmnd"));
+                customer.setEmail(result.getString("email"));
+                customer.setGender(result.getBoolean("gender"));
+                customer.setPhone(result.getString("phone_number"));
+                service.setCustomer(customer);
+                State state = new State();
+                state.setId(result.getInt("state_id"));
+                state.setName(result.getString("state_name"));
+                service.setState(state);
+                Room room = new Room();
+                room.setId(result.getInt("room_id"));
+                room.setName(result.getString("room_name"));
+                Category category = new Category();
+                category.setId(result.getInt("cateid"));
+                category.setName(result.getString("catename"));
+                category.setPrice(result.getDouble("cateprice"));
+                room.setCategory(category);
+                service.setRoom(room);
+                services.add(service);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return services;
+    }
+    
+    public ArrayList<Service> getCheckkouts() {
+        ArrayList<Service> services = new ArrayList<>();
+        String sql = "SELECT s.[id]\n"
+                + "      ,s.[startDate]\n"
+                + "      ,s.[endDate]\n"
+                + "      ,s.[dateCreate]\n"
+                + "      ,s.[dateUpdate]\n"
+                + "      ,s.[roomId]\n"
+                + "	  ,c.id as 'customer_id'\n"
+                + "      ,c.[name] as 'customer_name'\n"
+                + "	  ,c.phone_number\n"
+                + "	  ,c.gender\n"
+                + "	  ,c.cmnd\n"
+                + "	  ,c.email\n"
+                + "	  ,st.id as 'state_id'\n"
+                + "       ,st.[name] as 'state_name'\n"
+                + "	  ,r.id as 'room_id'\n"
+                + "	  ,r.[name] as 'room_name'\n"
+                + "  FROM [service] s inner join customer c \n"
+                + "  on s.customerId = c.id \n"
+                + "  inner join [state] st\n"
+                + "  on s.stateId = st.id\n"
+                + "  inner join room as r on r.id = s.roomId\n"
+                + " WHERE LOWER(st.[name]) = LOWER(N'Đã trả phòng') OR LOWER(st.[name]) = LOWER(N'Hủy')";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                Service service = new Service();
+                service.setId(result.getInt("id"));
+                service.setStart(result.getDate("startDate"));
+                service.setEnd(result.getDate("endDate"));
+                service.setCreate(result.getDate("dateCreate"));
+                service.setUpdate(result.getDate("dateUpdate"));
+                Customer customer = new Customer();
+                customer.setId(result.getInt("customer_id"));
+                customer.setName(result.getString("customer_name"));
+                customer.setCmnd(result.getString("cmnd"));
+                customer.setEmail(result.getString("email"));
+                customer.setGender(result.getBoolean("gender"));
+                customer.setPhone(result.getString("phone_number"));
+                service.setCustomer(customer);
+                State state = new State();
+                state.setId(result.getInt("state_id"));
+                state.setName(result.getString("state_name"));
+                service.setState(state);
+                Room room = new Room();
+                room.setId(result.getInt("room_id"));
+                room.setName(result.getString("room_name"));
+                service.setRoom(room);
+                services.add(service);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ServiceDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return services;
+    }
+    
+    
+    public ArrayList<Service> getServiceSetted(int roomId) {
+        ArrayList<Service> services = new ArrayList<>();
+        String sql = "SELECT s.[id]\n"
+                + "      ,s.[startDate]\n"
+                + "      ,s.[endDate]\n"
+                + "      ,s.[dateCreate]\n"
+                + "      ,s.[dateUpdate]\n"
+                + "      ,s.[roomId]\n"
+                + "	  ,c.id as 'customer_id'\n"
+                + "       ,c.[name] as 'customer_name'\n"
+                + "	  ,c.phone_number\n"
+                + "	  ,c.gender\n"
+                + "	  ,c.cmnd\n"
+                + "	  ,c.email\n"
+                + "	  ,st.id as 'state_id'\n"
+                + "       ,st.[name] as 'state_name'\n"
+                + "	  ,r.id as 'room_id'\n"
+                + "	  ,r.[name] as 'room_name'\n"
+                + "  FROM [service] s inner join customer c \n"
+                + "  on s.customerId = c.id \n"
+                + "  inner join [state] st\n"
+                + "  on s.stateId = st.id\n"
+                + "  inner join room as r on r.id = s.roomId"
+                + " where r.id = ? and st.name = N'Đặt trước'\n";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, roomId);
             ResultSet result = statement.executeQuery();
             while (result.next()) {
                 Service service = new Service();

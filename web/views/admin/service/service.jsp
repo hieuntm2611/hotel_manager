@@ -31,69 +31,86 @@
                                 <table class="min-w-full">
                                     <thead class="border-b">
                                         <tr>
-                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                            <th scope="col" class="text-base font-medium text-gray-900 px-6 py-4 text-left">
                                                 Id
                                             </th>
-                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                            <th scope="col" class="text-base font-medium text-gray-900 px-6 py-4 text-left">
                                                 Room
                                             </th>
-                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                            <th scope="col" class="text-base font-medium text-gray-900 px-6 py-4 text-left">
                                                 Name
                                             </th>
-                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                            <th scope="col" class="text-base font-medium text-gray-900 px-6 py-4 text-left">
                                                 Phone
                                             </th>
-                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                            <th scope="col" class="text-base font-medium text-gray-900 px-6 py-4 text-left">
                                                 Cmnd
                                             </th>
-                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                            <th scope="col" class="text-base font-medium text-gray-900 px-6 py-4 text-left">
                                                 Email
                                             </th>
-                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                            <th scope="col" class="text-base font-medium text-gray-900 px-6 py-4 text-left">
                                                 Gender
                                             </th>
-                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                            <th scope="col" class="text-base font-medium text-gray-900 px-6 py-4 text-left">
                                                 Start
                                             </th>
-                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                            <th scope="col" class="text-base font-medium text-gray-900 px-6 py-4 text-left">
                                                 End
                                             </th>
-                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                            <th scope="col" class="text-base font-medium text-gray-900 px-6 py-4 text-left">
                                                 State
-                                            </th
+                                            </th>
+                                            <th scope="col" class="text-base font-medium text-gray-900 px-6 py-4 text-left">
+                                                Price
+                                            </th>
+                                            <th scope="col" class="text-base font-medium text-gray-900 px-6 py-4 text-left">
+                                                Action
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach items="${requestScope.services}" var="service">
-                                        <tr class="bg-white border-b">
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${service.id}</td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                ${service.room.name}
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                ${service.customer.name}
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                ${service.customer.phone}
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                ${service.customer.cmnd}
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                ${service.customer.email}
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                ${service.customer.gender}
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                ${service.start}
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                ${service.end}
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                ${service.state.name}
-                                            </td>
+                                        <c:forEach items="${requestScope.services}" var="service">
+                                            <tr class="bg-white border-b">
+                                                <td class="px-6 py-4 whitespace-nowrap text-xs font-medium text-gray-900">${service.id}</td>
+                                                <td class="text-xs text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                                                    ${service.room.name}
+                                                </td>
+                                                <td class="text-xs text-gray-900 font-medium  px-6 py-4 whitespace-nowrap">
+                                                    ${service.customer.name}
+                                                </td>
+                                                <td class="text-xs text-gray-900 font-medium  px-6 py-4 whitespace-nowrap">
+                                                    ${service.customer.phone}
+                                                </td>
+                                                <td class="text-xs text-gray-900 font-medium  px-6 py-4 whitespace-nowrap">
+                                                    ${service.customer.cmnd}
+                                                </td>
+                                                <td class="text-xs text-gray-900 font-medium  px-6 py-4 whitespace-nowrap">
+                                                    ${service.customer.email}
+                                                </td>
+                                                <td class="text-xs text-gray-900 font-medium  px-6 py-4 whitespace-nowrap">
+                                                    ${service.customer.gender}  
+                                                </td>
+                                                <td class="text-xs text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                                                    ${service.start}
+                                                </td>
+                                                <td class="text-xs text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                                                    ${service.end}
+                                                </td>
+                                                <td class="text-xs text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                                                    ${service.state.name}
+                                                </td>
+                                                <td id="price-${service.id}" class="text-xs text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                                                    ${service.getTotal()}
+                                                </td>
+                                        <script>
+                                            var x = ${service.getTotal()};
+                                            x = x.toLocaleString('vi', {style: 'currency', currency: 'VND'});
+                                            $("#price-${service.id}").text(x);
+                                        </script>
+                                        <td class="text-xs text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                                            <a href="/admin/service/checkout?id=${service.id}" class="text-red-600 hover:text-blue-700 transition duration-300 ease-in-out mb-4">Checkout/Cancel</a>
+                                        </td>
                                         </tr>
                                     </c:forEach>
                                     </tbody>

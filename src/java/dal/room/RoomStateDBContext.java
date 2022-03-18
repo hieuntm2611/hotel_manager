@@ -64,6 +64,28 @@ public class RoomStateDBContext extends DBContext<RoomState>{
         }
         return null;
     }
+    
+    public RoomState getByName(String name) {
+        String sql = "SELECT [id]\n" +
+                    "      ,[name]\n" +
+                    "  FROM [room_state]"
+                + " where LOWER(name)=LOWER(?)";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, name);
+            ResultSet result = statement.executeQuery();
+            if (result.next()) {
+                RoomState rs = new RoomState();
+                rs.setId(result.getInt("id"));
+                rs.setName(result.getString("name"));
+                return rs;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RoomStateDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 
     @Override
     public void insert(RoomState rs) {

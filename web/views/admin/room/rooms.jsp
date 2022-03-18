@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -32,64 +33,28 @@
                                                 Room
                                             </th>
                                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                Name
+                                                Room State
                                             </th>
                                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                Phone
+                                                Action
                                             </th>
-                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                Cmnd
-                                            </th>
-                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                Email
-                                            </th>
-                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                Gender
-                                            </th>
-                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                Start
-                                            </th>
-                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                End
-                                            </th>
-                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
-                                                State
-                                            </th
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach items="${requestScope.services}" var="service">
-                                        <tr class="bg-white border-b">
-                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${service.id}</td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                ${service.room.name}
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                ${service.customer.name}
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                ${service.customer.phone}
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                ${service.customer.cmnd}
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                ${service.customer.email}
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                ${service.customer.gender}
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                ${service.customer.start}
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                ${service.customer.end}
-                                            </td>
-                                            <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                ${service.customer.state}
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
+                                        <c:forEach items="${requestScope.rooms}" var="room">
+                                            <tr class="bg-white border-b">
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${room.id}</td>
+                                                <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
+                                                    ${room.name}
+                                                </td>
+                                                <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
+                                                    ${room.roomState.name}
+                                                </td>
+                                                <td class="text-xs text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                                                    <a href="/admin/room/update?id=${room.id}" class="text-red-600 hover:text-blue-700 transition duration-300 ease-in-out mb-4">Edit</a>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
                                     </tbody>
                                 </table>
                             </div>

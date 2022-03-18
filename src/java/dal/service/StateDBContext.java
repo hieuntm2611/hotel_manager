@@ -6,6 +6,7 @@
 package dal.service;
 
 import dal.DBContext;
+import dal.room.RoomStateDBContext;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.customer.State;
+import model.room.RoomState;
 
 /**
  *
@@ -58,6 +60,28 @@ public class StateDBContext extends DBContext<State>{
                 state.setId(result.getInt("id"));
                 state.setName(result.getString("name"));
                 return state;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StateDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public State getByName(String name) {
+        String sql = "SELECT [id]\n" +
+                    "      ,[name]\n" +
+                    "  FROM [state]"
+                + " where LOWER(name)=LOWER(?)";
+        PreparedStatement statement = null;
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, name);
+            ResultSet result = statement.executeQuery();
+            if (result.next()) {
+                State st = new State();
+                st.setId(result.getInt("id"));
+                st.setName(result.getString("name"));
+                return st;
             }
         } catch (SQLException ex) {
             Logger.getLogger(StateDBContext.class.getName()).log(Level.SEVERE, null, ex);

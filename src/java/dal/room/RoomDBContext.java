@@ -63,76 +63,24 @@ public class RoomDBContext extends DBContext<Room> {
         }
         return rooms;
     }
-
-    public ArrayList allHaveRoom() {
-        ArrayList<Room> rooms = new ArrayList<>();
-        String sql = "SELECT r.[id],\n"
-                + "	r.[name]\n"
-                + "	,[categoryId]\n"
-                + "	,c.[name] as cname\n"
-                + "	,c.[price]\n"
-                + "   ,[roomstateId]\n"
-                + "  ,rs.[name] as rsname\n"
-                + "  ,s.id as 'service_id'\n"
-                + "  ,st.id as 'state_id'\n"
-                + "  ,st.name as 'state_name'\n"
-                + "FROM [room]r inner join category c \n"
-                + " on r.categoryId = c.id \n"
-                + " inner join room_state rs \n"
-                + " on rs.id = r.roomstateId\n"
-                + " full outer join [service] as s on s.roomId = r.id\n"
-                + "full join [state] as st on st.id = s.stateId\n"
-                + "where s.id is null or st.name = N'Hủy' or st.name = N'Đã trả phòng' or st.name = N'Đặt trước'";
-        PreparedStatement statement = null;
-        try {
-            statement = connection.prepareStatement(sql);
-            ResultSet result = statement.executeQuery();
-            while (result.next()) {
-                Room r = new Room();
-                r.setId(result.getInt("id"));
-                r.setName(result.getString("name"));
-                r.setCategoryId(result.getInt("categoryId"));
-                r.setRoomstateId(result.getInt("roomstateId"));
-                Category c = new Category();
-                c.setId(r.getCategoryId());
-                c.setName(result.getString("cname"));
-                c.setPrice(result.getDouble("price"));
-                r.setCategory(c);
-                RoomState rs = new RoomState();
-                rs.setId(r.getRoomstateId());
-                rs.setName(result.getString("rsname"));
-                r.setRoomState(rs);
-                rooms.add(r);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(RoomDBContext.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return rooms;
-    }
     
-    public ArrayList<Room> roomSetted(int romid) {
+    public ArrayList<Room> allHaveRoom() {
         ArrayList<Room> rooms = new ArrayList<>();
-        String sql = "SELECT r.[id],\n"
-                + "	r.[name]\n"
-                + "	,[categoryId]\n"
-                + "	,c.[name] as cname\n"
-                + "	,c.[price]\n"
-                + "   ,[roomstateId]\n"
-                + "  ,rs.[name] as rsname\n"
-                + "  ,s.id as 'service_id'\n"
-                + "  ,st.id as 'state_id'\n"
-                + "  ,st.name as 'state_name'\n"
-                + "FROM [room]r inner join category c \n"
-                + " on r.categoryId = c.id \n"
-                + " inner join room_state rs \n"
-                + " on rs.id = r.roomstateId\n"
-                + " full outer join [service] as s on s.roomId = r.id\n"
-                + "full join [state] as st on st.id = s.stateId\n"
-                + "where r.[id] = ? and (s.id is null or st.name = N'Hủy' or st.name = N'Đã trả phòng' or st.name = N'Đặt trước')";
+        String sql = "SELECT r.[id]\n"
+                + "      ,r.[name]\n"
+                + "      ,[categoryId]\n"
+                + "	  ,c.[name] as cname\n"
+                + "	  ,c.[price]\n"
+                + "      ,[roomstateId]\n"
+                + "	  ,rs.[name] as rsname\n"
+                + "  FROM [room] r inner join category c \n"
+                + "  on r.categoryId = c.id \n"
+                + "  inner join room_state rs \n"
+                + "  on rs.id = r.roomstateId\n"
+                + " WHERE rs.[name] != N'Đang có người thuê' and rs.[name] != N'Đang sửa chữa'";
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(sql);
-            statement.setInt(1, romid);
             ResultSet result = statement.executeQuery();
             while (result.next()) {
                 Room r = new Room();
@@ -159,9 +107,8 @@ public class RoomDBContext extends DBContext<Room> {
 
     @Override
     public Room get(int id) {
-
         String sql = "SELECT r.[id]\n"
-                + "      ,r.[name]\n"
+                + "       ,r.[name]\n"
                 + "      ,[categoryId]\n"
                 + "	  ,c.[name] as cname\n"
                 + "	  ,c.[price]\n"
@@ -171,7 +118,7 @@ public class RoomDBContext extends DBContext<Room> {
                 + "  on r.categoryId = c.id \n"
                 + "  inner join room_state rs \n"
                 + "  on rs.id = r.roomstateId"
-                + " where id = ?";
+                + " where r.id = ?";
         PreparedStatement statement = null;
         try {
             statement = connection.prepareStatement(sql);

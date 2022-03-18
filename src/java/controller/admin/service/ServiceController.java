@@ -33,7 +33,7 @@ public class ServiceController extends BaseAuthController {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ServiceDBContext db = new ServiceDBContext();
-        ArrayList<Service> services = db.all();
+        ArrayList<Service> services = db.getServices();
         request.setAttribute("services", services);
         request.getRequestDispatcher("/views/admin/service/service.jsp").forward(request, response);
     }

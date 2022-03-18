@@ -5,7 +5,9 @@
  */
 package model.customer;
 
+import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.concurrent.TimeUnit;
 import model.room.Room;
 
 /**
@@ -21,6 +23,21 @@ public class Service {
     private Date end;
     private Date create;
     private Date update;
+    private double price;
+
+    public double getPrice() {
+        return price;
+    }
+    public BigDecimal getTotal(){
+        long numDay = TimeUnit.MILLISECONDS.toDays(end.getTime() - start.getTime());
+        double p = room.getCategory().getPrice();
+        BigDecimal total = new BigDecimal(p*numDay);
+        return  total;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
     public int getId() {
         return id;
