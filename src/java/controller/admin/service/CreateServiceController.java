@@ -114,11 +114,11 @@ public class CreateServiceController extends BaseAuthController {
         }
         ArrayList<Service> servicesSetteds = db.getServiceSetted(room.getId());
         for (Service servicesSetted : servicesSetteds) {
-            if ((servicesSetted.getStart().getTime() <= start.getTime() || start.getTime() <= servicesSetted.getEnd().getTime()
-                    || servicesSetted.getStart().getTime() <= end.getTime() || end.getTime() <= servicesSetted.getEnd().getTime())) {
+            if ((servicesSetted.getStart().getTime() <= start.getTime() && start.getTime() <= servicesSetted.getEnd().getTime())
+                    || (servicesSetted.getStart().getTime() <= end.getTime() && end.getTime() <= servicesSetted.getEnd().getTime())) {
                 request.setAttribute("error", "You cannot book during this time. "
                         + "This room has been used from "
-                        + start + " to " + end);
+                        + servicesSetted.getStart() + " to " + servicesSetted.getEnd());
                 request.setAttribute("customer", customer);
                 StateDBContext statedb = new StateDBContext();
                 ArrayList<State> states = statedb.all();

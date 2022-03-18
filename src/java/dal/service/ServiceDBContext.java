@@ -170,11 +170,15 @@ public class ServiceDBContext extends DBContext<Service> {
                 + "       ,st.[name] as 'state_name'\n"
                 + "	  ,r.id as 'room_id'\n"
                 + "	  ,r.[name] as 'room_name'\n"
+                + "       ,cate.id as cateid \n"
+                + "       ,cate.name as catename \n"
+                + "       ,cate.price as cateprice \n"
                 + "  FROM [service] s inner join customer c \n"
                 + "  on s.customerId = c.id \n"
                 + "  inner join [state] st\n"
                 + "  on s.stateId = st.id\n"
                 + "  inner join room as r on r.id = s.roomId\n"
+                + " inner join category as cate on cate.id = r.categoryId \n"
                 + " WHERE LOWER(st.[name]) = LOWER(N'Đã trả phòng') OR LOWER(st.[name]) = LOWER(N'Hủy')";
         PreparedStatement statement = null;
         try {
@@ -202,6 +206,11 @@ public class ServiceDBContext extends DBContext<Service> {
                 Room room = new Room();
                 room.setId(result.getInt("room_id"));
                 room.setName(result.getString("room_name"));
+                Category category = new Category();
+                category.setId(result.getInt("cateid"));
+                category.setName(result.getString("catename"));
+                category.setPrice(result.getDouble("cateprice"));
+                room.setCategory(category);
                 service.setRoom(room);
                 services.add(service);
             }

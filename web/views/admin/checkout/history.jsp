@@ -54,8 +54,11 @@
                                                 End
                                             </th>
                                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                Price
+                                            </th>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                                 State
-                                            </th
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -86,11 +89,19 @@
                                                 <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
                                                     ${service.end}
                                                 </td>
-                                                <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                                                    ${service.state.name}
+                                                <td id="price-${service.id}" class="text-xs text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                                                    ${service.getTotal()}
                                                 </td>
-                                            </tr>
-                                        </c:forEach>
+                                        <script>
+                                            var x = ${service.getTotal()};
+                                            x = x.toLocaleString('vi', {style: 'currency', currency: 'VND'});
+                                            $("#price-${service.id}").text(x);
+                                        </script>
+                                        <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
+                                            ${service.state.name}
+                                        </td>
+                                        </tr>
+                                    </c:forEach>
                                     </tbody>
                                 </table>
                             </div>
