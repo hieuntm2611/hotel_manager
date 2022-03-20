@@ -28,8 +28,9 @@ public class Service {
     public double getPrice() {
         return price;
     }
+    
     public BigDecimal getTotal(){
-        long numDay = TimeUnit.MILLISECONDS.toDays(end.getTime() - start.getTime());
+        long numDay = TimeUnit.MILLISECONDS.toDays(end.getTime() - start.getTime())>0?TimeUnit.MILLISECONDS.toDays(end.getTime() - start.getTime()):1;
         double p = room.getCategory().getPrice();
         BigDecimal total = new BigDecimal(p*numDay);
         return  total;

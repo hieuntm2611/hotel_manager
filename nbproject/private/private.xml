@@ -2,12 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/dal/service/ServiceDBContext.java</file>
-            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/web/views/admin/service/create.jsp</file>
-            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/controller/admin/service/ServiceController.java</file>
-            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/src/java/dal/room/RoomDBContext.java</file>
-            <file>file:/C:/Users/hieu2/Documents/NetBeansProjects/HotelManage/web/views/admin/customer/create.jsp</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

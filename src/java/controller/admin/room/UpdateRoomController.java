@@ -6,7 +6,9 @@
 package controller.admin.room;
 
 import controller.auth.BaseAuthController;
+import dal.room.CategoryDBContext;
 import dal.room.RoomDBContext;
+import dal.room.RoomStateDBContext;
 import dal.user.UserDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,7 +18,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.auth.User;
+import model.room.Category;
 import model.room.Room;
+import model.room.RoomState;
 
 /**
  *
@@ -31,38 +35,43 @@ public class UpdateRoomController extends BaseAuthController {
         int num = userDB.hasPermission(user.getId(), "CUSTOMER", "READ");
         return num >= 1;
     }
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RoomDBContext db = new RoomDBContext();
-        ArrayList<Room> rooms = db.all();
-        request.setAttribute("rooms", rooms);
+        int id = Integer.parseInt(request.getParameter("id"));
+        RoomDBContext roomDB = new RoomDBContext();
+        Room room = roomDB.get(id);
+        CategoryDBContext categoryDB = new CategoryDBContext();
+        ArrayList<Category> categorys = categoryDB.all();
+        RoomStateDBContext roomStateDB = new RoomStateDBContext();
+        ArrayList<RoomState> roomStates = roomStateDB.all();
+        request.setAttribute("roomStates", roomStates);
+        request.setAttribute("categorys", categorys);
+        request.setAttribute("room", room);
         request.getRequestDispatcher("/views/admin/room/update.jsp").forward(request, response);
     }
 
-    
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    
     @Override
     protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    int id = Integer.parseInt(request.getParameter("id"));
+        int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
-    int categoryId = Integer.parseInt(request.getParameter("categoryId"));
-    int roomstateId= Integer.parseInt(request.getParameter("roomstateId"));
-    Room r = new Room();
-    r.setCategoryId(categoryId);
-    r.setId(id);
-    r.setName(name);
-    r.setRoomstateId(roomstateId);
-    RoomDBContext db = new RoomDBContext();
-    db.update(r);
-    response.sendRedirect("/admin/room");
+        int categoryId = Integer.parseInt(request.getParameter("category"));
+        int roomstateId = Integer.parseInt(request.getParameter("roomState"));
+        Room r = new Room();
+        r.setCategoryId(categoryId);
+        r.setId(id);
+        r.setName(name);
+        r.setRoomstateId(roomstateId);
+        RoomDBContext db = new RoomDBContext();
+        db.update(r);
+        response.sendRedirect("/admin/room");
     }
 
     /**
