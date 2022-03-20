@@ -33,6 +33,9 @@
                                                 Room
                                             </th>
                                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
+                                                Category
+                                            </th>
+                                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
                                                 Room State
                                             </th>
                                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">
@@ -46,6 +49,9 @@
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${room.id}</td>
                                                 <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                                                     ${room.name}
+                                                </td>
+                                                <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
+                                                    ${room.category.name}
                                                 </td>
                                                 <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
                                                     ${room.roomState.name}

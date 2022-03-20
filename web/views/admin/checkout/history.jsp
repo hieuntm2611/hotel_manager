@@ -19,6 +19,35 @@
                 <jsp:include page="../main/slidebar.jsp" />
             </div>
             <div class="w-full px-5 py-5">
+                <div class="mt-5">
+                    <form class="flex items-center space-x-4">
+                        <div class="xl:w-80">
+                            <input type="text"
+                                   class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                   id="search"
+                                   name="search"
+                                   value="${search}"
+                                   placeholder="Search"/>
+                        </div>
+                        <div class="xl:w-80">
+                            <input type="date"
+                                   class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                   id="search"
+                                   name="start"
+                                   value="${start}"
+                                   placeholder="Search"/>
+                        </div>
+                        <div class="xl:w-80">
+                            <input type="date"
+                                   class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                   id="search"
+                                   name="end"
+                                   value="${end}"
+                                   placeholder="Search"/>
+                        </div>
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
                 <div class="flex flex-col">
                     <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
@@ -106,6 +135,23 @@
                                 </table>
                             </div>
                         </div>
+                        <c:if test="${search==null && start==null && end==null}">
+                            <div class="flex justify-end items-center mr-10 mt-10">
+                                <div class="flex space-x-2 justify-center">
+                                    <c:if test="${page>1}">
+                                        <a href="history?page=${page-1>0?page-1:page}" class="inline-block px-6 py-2 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
+                                            Prev
+                                        </a>
+                                    </c:if>
+                                    <p class="text-xl mx-10">${page}/${size}</p>
+                                    <c:if test="${page<size}">
+                                        <a  href="history?page=${page+1<=size?page+1:page}" class="inline-block px-6 py-2 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
+                                            Next
+                                        </a>
+                                    </c:if>
+                                </div>
+                            </div>
+                        </c:if>
                     </div>
                 </div>
             </div>
